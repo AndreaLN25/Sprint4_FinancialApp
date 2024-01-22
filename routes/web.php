@@ -19,7 +19,18 @@ use Illuminate\Support\Facades\Route;
 });
  */
 
-//User
-Route::get('user', [UserController::class, 'index']);
-
-
+//*******User********
+//UserLists
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+//User Form Creation
+Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
+//Store Data in DB
+Route::post('/users', [UserController::class, 'store'])->name('user.store');
+//Display specific user information
+Route::get('/users/{id}', [UserController::class, 'show'])->name('user.show');
+//Edit User Form
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+//Update User Information
+Route::put('/users/{id}', [UserController::class, 'update'])->name('user.update');
+//Delete a User from DB
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
