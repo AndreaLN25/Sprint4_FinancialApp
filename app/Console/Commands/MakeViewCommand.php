@@ -33,7 +33,7 @@ class MakeViewCommand extends Command
         if(File::exists($path)){
             $this->error("The [{$path}] view already exists!");
         }
-        File::put($path, $path);
+        File::put($path,'');
         $this->info("File {$path} created");
     }
     

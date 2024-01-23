@@ -14,7 +14,7 @@ class UserController extends Controller
         //return view('user');
         $users = UserModel::all();
         //echo $users;
-        return view('user', compact('users'));
+        return view('users.index', compact('users'));
     }
 
 
@@ -22,7 +22,7 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(){
-        return view ('user.create');
+        return view ('users.create');
     }
 
 
@@ -38,7 +38,7 @@ class UserController extends Controller
         ]);
 
         UserModel::create($request->all());
-        return redirect()->route("user.index")
+        return redirect()->route("users.index")
             ->with('success','User added successfully.');
     }
 
@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function show(string $id){
         $user = UserModel::find($id);
-        return view('user.show', compact('user'));
+        return view('users.show', compact('user'));
     }
 
 
@@ -59,7 +59,12 @@ class UserController extends Controller
      */
     public function edit(string $id){
         $user = UserModel::find($id);
-        return view('user.edit', compact('user'));
+
+        
+/*     if (!$user) {
+        return redirect()->route("users.index")->with('error', 'User not found.');
+    } */
+        return view('users.edit', compact('user'));
     }
 
 
@@ -78,13 +83,13 @@ class UserController extends Controller
         $user = UserModel::find($id);
 
         if (!$user) {
-            return redirect()->route("user")
+            return redirect()->route("users.index")
                 ->with('error', 'User not found.');
         }
 
         $user->update($request->all());
 
-        return redirect()->route('user.index')
+        return redirect()->route('users.show')
             ->with('success','User updated successfully');
     }
 
@@ -96,7 +101,7 @@ class UserController extends Controller
     public function destroy(string $id){
         $user = UserModel::find($id);
         $user -> delete();
-        return redirect()->route('user')
+        return redirect()->route('user.index')
             ->with('success','User deleted successfully');
     }
 

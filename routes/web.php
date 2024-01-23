@@ -21,16 +21,17 @@ use Illuminate\Support\Facades\Route;
 
 //*******User********
 //UserLists
-Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 //User Form Creation
-Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 //Store Data in DB
 Route::post('/users', [UserController::class, 'store'])->name('user.store');
 //Display specific user information
-Route::get('/users/{id}', [UserController::class, 'show'])->name('user.show');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 //Edit User Form
-Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 //Update User Information
-Route::put('/users/{id}', [UserController::class, 'update'])->name('user.update');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 //Delete a User from DB
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    
