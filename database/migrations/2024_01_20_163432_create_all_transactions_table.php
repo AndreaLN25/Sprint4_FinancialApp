@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('all_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('mailadress')->unique();
-            $table->string('password');
+            $table->enum('movement_type', ['income', 'expense']);
+            $table->string('description');
+            $table->date('date');
+            $table->decimal('amount', 10, 2);
+            $table->enum('completed', ['yes', 'no']);
+            $table->enum('category_income', ['salary', 'interest', 'investment', 'rent'])->nullable();
+            $table->enum('category_expense', ['leisure', 'restaurant', 'transport', 'health', 'clothing', 'others'])->nullable();
+            $table->enum('payment_method_income', ['cash', 'transfer', 'check', 'bizum'])->nullable();
+            $table->enum('payment_method_expense', ['cash', 'transfer', 'check', 'bizum', 'card'])->nullable();
             $table->timestamps();
         });
     }
