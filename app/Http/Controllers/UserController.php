@@ -33,7 +33,7 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required|string',
             'last_name'=>'required|string',
-            'mail_adress'=>'required|email|unique:all_users,mailadress',
+            'mailadress'=>'required|email|unique:all_users,mailadress',
             'password'=>'required|string'
         ]);
 
@@ -76,7 +76,7 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required|string',
             'last_name'=>'required|string',
-            'mail_adress'=>'required|email|unique:all_users,mailadress,' . $id,
+            'mailadress'=>'required|email|unique:all_users,mailadress,' . $id,
             'password'=>'required|string'
         ]);
 
@@ -89,7 +89,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('users.show')
+        return redirect()->route('users.show', ['id' => $user->id])
             ->with('success','User updated successfully');
     }
 
@@ -101,7 +101,7 @@ class UserController extends Controller
     public function destroy(string $id){
         $user = UserModel::find($id);
         $user -> delete();
-        return redirect()->route('user.index')
+        return redirect()->route('user.destroy')
             ->with('success','User deleted successfully');
     }
 

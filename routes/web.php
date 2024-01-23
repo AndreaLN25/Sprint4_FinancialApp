@@ -25,7 +25,7 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 //User Form Creation
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 //Store Data in DB
-Route::post('/users', [UserController::class, 'store'])->name('user.store');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
 //Display specific user information
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 //Edit User Form

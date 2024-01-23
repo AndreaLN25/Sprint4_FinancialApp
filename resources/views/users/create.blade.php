@@ -12,23 +12,23 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
 <div class="container h-100 mt-5">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6">
-      <h3>Add a Post</h3>
+      <h3>Add a User</h3>
       <form action="{{ route('users.store') }}" method="post">
         @csrf
         <div class="form-group">
-          <label for="title">First Name</label>
+          <label for="first_name">First Name</label>
           <input type="text" class="form-control" id="first_name" name="first_name" required>
         </div>
         <div class="form-group">
-          <label for="body">Last Name</label>
+          <label for="last_name">Last Name</label>
           <textarea class="form-control" id="last_name" name="last_name" rows="3" required></textarea>
         </div>
         <div class="form-group">
-          <label for="body">Email address</label>
-          <textarea class="form-control" id="mailadres" name="mailadress" rows="3" required></textarea>
+          <label for="mailadress">Email address</label>
+          <input type="email" class="form-control" id="mailadress" name="mailadress" required>
         </div>
         <div class="form-group">
-          <label for="body">Password</label>
+          <label for="password">Password</label>
           <textarea class="form-control" id="password" name="password" rows="3" required></textarea>
         </div>
         <br>

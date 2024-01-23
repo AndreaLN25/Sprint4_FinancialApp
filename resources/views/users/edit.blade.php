@@ -18,12 +18,12 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
               @csrf
               @method('PUT')
               <div class="form-group">
-                <label for="title">User's First Name</label>
+                <label for="first_name">User's First Name</label>
                 <input type="text" class="form-control" id="first_name" name="first_name"
                   value="{{ $user->first_name }}" required>
               </div>
               <div class="form-group">
-                <label for="title">User's Last Name</label>
+                <label for="last_name">User's Last Name</label>
                 <input type="text" class="form-control" id="last_name" name="last_name"
                   value="{{ $user->last_name }}" required>
               </div>
