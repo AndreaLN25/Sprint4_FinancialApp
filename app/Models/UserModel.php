@@ -18,7 +18,11 @@ class UserModel extends Model
     ];
 
     public function transactions(){
-        return $this->hasMany(TransactionModel::class);
-        //return $this->belongsToMany(TransactionModel::class);
+        //return $this->hasMany(TransactionModel::class);
+        return $this->belongsToMany(TransactionModel::class);
     }
+    public function sharedTransactions(){
+        return $this->hasMany(SharedTransactionModel::class, 'user_id');
+}
+
 }

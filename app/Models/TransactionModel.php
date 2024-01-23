@@ -25,7 +25,11 @@ class TransactionModel extends Model
     protected $dates = ['date'];
 
     public function users(){
-        return $this->hasMany(UserModel::class);
-        //return $this->belongsTo(UserModel::class);
+        //return $this->hasMany(UserModel::class);
+        return $this->belongsToMany(UserModel::class);
     }
+    public function sharedTransactions(){
+        return $this->hasMany(SharedTransactionModel::class, 'transaction_id','id');
+}
+
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SharedTransactionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -56,3 +57,24 @@ Route::get('/transactions/{id}/edit', [TransactionController::class, 'edit'])->n
 Route::put('/transactions/{id}', [TransactionController::class, 'update'])->name('transactions.update');
 // Delete a Transaction from DB
 Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
+
+
+
+
+//******SharedTransactions*******
+//Route::resource('shared_transactions', SharedTransactionController::class);
+
+//SharedTransactionsGroupList
+Route::get('/shared_transactions', [SharedTransactionController::class, 'index'])->name('shared_transactions.index');
+//Shared Transaction From
+Route::get('/shared_transactions/create', [SharedTransactionController::class, 'create'])->name('shared_transactions.create');
+//Store Data in DB
+Route::post('/shared_transactions', [SharedTransactionController::class, 'store'])->name('shared_transactions.store');
+// Display specific shared transaction information
+Route::get('/shared_transactions/{shared_transaction}', [SharedTransactionController::class, 'show'])->name('shared_transactions.show');
+// Edit SharedTransaction Form
+Route::get('/shared_transactions/{shared_transaction}/edit', [SharedTransactionController::class, 'edit'])->name('shared_transactions.edit');
+//Update 
+Route::put('/shared_transactions/{shared_transaction}', [SharedTransactionController::class, 'update'])->name('shared_transactions.update');
+// Delete from DB
+Route::delete('/shared_transactions/{shared_transaction}', [SharedTransactionController::class, 'destroy'])->name('shared_transactions.destroy');

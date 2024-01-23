@@ -31,7 +31,7 @@ class TransactionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request){
-        /* $request->validate([
+        $request->validate([
             'movement_type' => ['required', Rule::in(['income', 'expense'])],
             'description' => 'required|string',
             'date' => 'required|date',
@@ -41,7 +41,7 @@ class TransactionController extends Controller
             'category_expense' => $request->input('movement_type') == 'expense' ? ['required', Rule::in(['leisure', 'restaurant', 'transport', 'health', 'clothing', 'others'])] : 'nullable',
             'payment_method_income' => $request->input('movement_type') == 'income'? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum'])] : 'nullable',
             'payment_method_expense' => $request->input('movement_type') == 'expense' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum', 'card'])] : 'nullable',
-        ]); */
+        ]);
 
         TransactionModel::create($request->all());
         return redirect()->route('transactions.index')
@@ -78,7 +78,7 @@ class TransactionController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id){        
-        /* $request->validate([
+        $request->validate([
             'movement_type' => ['required', Rule::in(['income', 'expense'])],
             'description' => 'required|string',
             'date' => 'required|date',
@@ -88,7 +88,7 @@ class TransactionController extends Controller
             'category_expense' => $request->input('movement_type') == 'expense' ? ['required', Rule::in(['leisure', 'restaurant', 'transport', 'health', 'clothing', 'others'])] : 'nullable',
             'payment_method_income' => $request->input('movement_type') == 'income' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum'])] : 'nullable',
             'payment_method_expense' => $request->input('movement_type') == 'expense' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum', 'card'])] : 'nullable',
-        ]); */
+        ]);
         
         $transaction = TransactionModel::find($id);
 

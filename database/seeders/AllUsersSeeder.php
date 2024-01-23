@@ -11,15 +11,7 @@ class AllUsersSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        //
-        UserModel::create([
-            'first_name' => 'Ana', 
-            'last_name' => 'Mendez', 
-            'mailadress'=> 'anamendez@gmail.com',
-            'password' => bcrypt('password456'),
-        ]);
-
+    public function run(): void{
+        UserModel::factory(10)->create();
     }
 }
