@@ -34,4 +34,5 @@ Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edi
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 //Delete a User from DB
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
     
