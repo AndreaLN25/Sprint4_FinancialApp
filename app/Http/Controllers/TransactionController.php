@@ -14,8 +14,8 @@ class TransactionController extends Controller
      */
     public function index(){
         //
-        $transaction = TransactionModel::all();
-        return view('transactions.index', compact('transaction'));
+        $transactions = TransactionModel::all();
+        return view('transactions.index', compact('transactions'));
     }
 
 
@@ -31,8 +31,7 @@ class TransactionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request){
-        //
-        $request->validate([
+        /* $request->validate([
             'movement_type' => ['required', Rule::in(['income', 'expense'])],
             'description' => 'required|string',
             'date' => 'required|date',
@@ -42,10 +41,10 @@ class TransactionController extends Controller
             'category_expense' => $request->input('movement_type') == 'expense' ? ['required', Rule::in(['leisure', 'restaurant', 'transport', 'health', 'clothing', 'others'])] : 'nullable',
             'payment_method_income' => $request->input('movement_type') == 'income'? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum'])] : 'nullable',
             'payment_method_expense' => $request->input('movement_type') == 'expense' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum', 'card'])] : 'nullable',
-        ]);
+        ]); */
 
         TransactionModel::create($request->all());
-        return redirect('transactions.index')
+        return redirect()->route('transactions.index')
             ->with('success','Transaction created successfully');
     }
 
@@ -54,9 +53,11 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(TransactionModel $transaction){
-        return view ('transactions.show', compact('transaction'));
+    public function show(string $id){
+        $transaction = TransactionModel::find($id);
+        return view('transactions.show', compact('transaction'));
     }
+
 
 
     /**
@@ -64,6 +65,10 @@ class TransactionController extends Controller
      */
     public function edit(string $id){
         $transaction = TransactionModel::find($id);
+
+    /*if (!$transaction) {
+        return redirect()->route("transactions.index")->with('error', 'Transaction not found.');
+    } */
         return view('transactions.edit',compact('transaction'));
     }
 
@@ -73,17 +78,18 @@ class TransactionController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id){        
-        $request->validate([
+        /* $request->validate([
             'movement_type' => ['required', Rule::in(['income', 'expense'])],
             'description' => 'required|string',
             'date' => 'required|date',
             'amount' => 'required|numeric|min:0',
             'completed' => ['required', Rule::in(['yes', 'no'])],
-            'category_income' => 'nullable|string', // Ajusta según tu lógica
-            'category_expense' => 'nullable|string', // Ajusta según tu lógica
-            'payment_method_income' => ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum'])],
-            'payment_method_expense' => ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum', 'card'])],
-        ]);
+            'category_income' => $request->input('movement_type') == 'income' ? ['required', Rule::in(['salary', 'interest', 'investment', 'rent'])] : 'nullable',
+            'category_expense' => $request->input('movement_type') == 'expense' ? ['required', Rule::in(['leisure', 'restaurant', 'transport', 'health', 'clothing', 'others'])] : 'nullable',
+            'payment_method_income' => $request->input('movement_type') == 'income' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum'])] : 'nullable',
+            'payment_method_expense' => $request->input('movement_type') == 'expense' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum', 'card'])] : 'nullable',
+        ]); */
+        
         $transaction = TransactionModel::find($id);
 
         if (!$transaction) {

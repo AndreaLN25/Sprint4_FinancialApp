@@ -11,9 +11,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        //return view('user');
         $users = UserModel::all();
-        //echo $users;
         return view('users.index', compact('users'));
     }
 
@@ -61,7 +59,7 @@ class UserController extends Controller
         $user = UserModel::find($id);
 
         
-/*     if (!$user) {
+    /*if (!$user) {
         return redirect()->route("users.index")->with('error', 'User not found.');
     } */
         return view('users.edit', compact('user'));
