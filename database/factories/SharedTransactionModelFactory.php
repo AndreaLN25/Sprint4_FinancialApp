@@ -27,7 +27,12 @@ class SharedTransactionModelFactory extends Factory
                 'user_id' => UserModel::factory(),
                 'transaction_id' => TransactionModel::factory(),
                 'amount' => $this->faker->randomFloat(2, 0, 1000),
-                'participants' => $this->faker->sentence,
+                'who_paid' => $user->id,
+                'number_of_participants' => $this->faker->numberBetween(1, 1000),
+                'name_of_participants' => UserModel::factory()->create()->first_name. ' ' . UserModel::factory()->create()->last_name,
+                'amount_per_participant' =>  $this->faker->randomFloat(2, 0, 1000) / $this->faker->numberBetween(1, 1000),
+                'date' => $this->faker->date,
+                'description' => $this->faker->sentence,
                 'approval_status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
                 'note' => $this->faker->sentence,
             ];
