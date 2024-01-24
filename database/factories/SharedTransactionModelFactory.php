@@ -20,17 +20,25 @@ class SharedTransactionModelFactory extends Factory
 
         public function definition():array
         {
-            $user = UserModel::factory()->create();
-            $transaction = TransactionModel::factory()->create();
-    
+
+            $participants = [];
+            $numberOfParticipants = $this->faker->numberBetween(1, 10);
+
+            for ($i = 0; $i < $numberOfParticipants; $i++) {
+                $participant = UserModel::factory()->create();
+                $participants[] = $participant->first_name . ' ' . $participant->last_name;
+            }
+
+            $totalAmount = $this->faker->randomFloat(2, 0, 100000);
+
             return [
-                'user_id' => UserModel::factory(),
-                'transaction_id' => TransactionModel::factory(),
-                'amount' => $this->faker->randomFloat(2, 0, 1000),
-                'who_paid' => $user->id,
-                'number_of_participants' => $this->faker->numberBetween(1, 1000),
-                'name_of_participants' => UserModel::factory()->create()->first_name. ' ' . UserModel::factory()->create()->last_name,
-                'amount_per_participant' =>  $this->faker->randomFloat(2, 0, 1000) / $this->faker->numberBetween(1, 1000),
+                'user_id' => UserModel::factory()->create()->id,
+                'transaction_id' => TransactionModel::factory()->create()->id,
+                'amount' => $totalAmount,
+                'who_paid' => UserModel::all()->random()->first_name . ' ' . UserModel::all()->random()->last_name,
+                'number_of_participants' => count($participants),
+                'name_of_participants' => implode(', ', $participants),
+                'amount_per_participant' => $totalAmount/$numberOfParticipants,
                 'date' => $this->faker->date,
                 'description' => $this->faker->sentence,
                 'approval_status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
