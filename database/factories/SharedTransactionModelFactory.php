@@ -24,12 +24,12 @@ class SharedTransactionModelFactory extends Factory
             $transaction = TransactionModel::factory()->create();
     
             return [
-                'user_id' => $user->id,
-                'transaction_id' => $transaction->id,
+                'user_id' => UserModel::factory(),
+                'transaction_id' => TransactionModel::factory(),
                 'amount' => $this->faker->randomFloat(2, 0, 1000),
                 'participants' => $this->faker->sentence,
                 'approval_status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
-                'note' => $this->faker->paragraph,
+                'note' => $this->faker->sentence,
             ];
     }
 }

@@ -21,11 +21,11 @@ class TransactionModelFactory extends Factory
             'description' => $this->faker->sentence,
             'date' => $this->faker->date,
             'amount' => $this->faker->randomFloat(2, 0, 1000),
-            'completed' => $this->faker->boolean,
-            'category_income' => $this->faker->word,
-            'category_expense' => $this->faker->word,
-            'payment_method_income' => $this->faker->word,
-            'payment_method_expense' => $this->faker->word,
+            'completed' => $this->faker->randomElement(['yes', 'no']),
+            'category_income' => $this->faker->randomElement(['salary', 'interest', 'investment', 'rent']),
+            'category_expense' => $this->faker->randomElement(['leisure', 'restaurant', 'transport', 'health', 'clothing', 'others']),
+            'payment_method_income' => $this->faker->randomElement(['cash', 'transfer', 'check', 'bizum']),
+            'payment_method_expense' => $this->faker->randomElement(['cash', 'transfer', 'check', 'bizum','card']),
         ];
     }
 }
