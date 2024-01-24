@@ -15,34 +15,54 @@
       <h3>Add a Shared Transaction</h3>
       <form action="{{ route('shared_transactions.store') }}" method="post">
         @csrf
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label for="user_id">User ID</label>
           <input type="text" class="form-control" id="user_id" name="user_id" required>
         </div>
         <div class="form-group">
           <label for="transaction_id">Transaction ID</label>
           <input type="text" class="form-control" id="transaction_id" name="transaction_id" required>
-        </div>
+        </div> --}}
         <div class="form-group">
           <label for="amount">Amount</label>
           <input type="text" class="form-control" id="amount" name="amount" required>
         </div>
         <div class="form-group">
-            <label for="participants">Participants</label>
-            <input type="text" class="form-control" id="participants" name="participants" required>
-          </div>
-          <div class="form-group">
-            <label for="approval_status">Approval Status</label>
-            <select class="form-control" id="approval_status" name="approval_status" required>
+          <label for="who_paid">Who Paid</label>
+          <input type="text" class="form-control" id="who_paid" name="who_paid" required>
+        </div>
+        <div class="form-group">
+          <label for="number_of_participants">Number of Participants</label>
+          <input type="text" class="form-control" id="number_of_participants" name="number_of_participants" required>
+        </div>
+        <div class="form-group">
+          <label for="name_of_participants">Name of Participants</label>
+          <input type="text" class="form-control" id="name_of_participants" name="name_of_participants" required>
+        </div>
+        <div class="form-group">
+          <label for="amount_per_participant">Amount per Participant</label>
+          <input type="text" class="form-control" id="amount_per_participant" name="amount_per_participant" required>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="approval_status">Approval Status</label>
+           <select class="form-control" id="approval_status" name="approval_status" required>
               <option value="pending">Pending</option>
               <option value="approved">Approved</option>
               <option value="rejected">Rejected</option>
             </select>
-          </div>
-          <div class="form-group">
-            <label for="note">Note</label>
-            <textarea class="form-control" id="note" name="note" rows="3" required></textarea>
-          </div>
+        </div>
+        <div class="form-group">
+          <label for="note">Note</label>
+          <textarea class="form-control" id="note" name="note" rows="3" required></textarea>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Create Shared Transaction</button>
       </form>

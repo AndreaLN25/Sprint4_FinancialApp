@@ -17,21 +17,41 @@
         <form action="{{ route('shared_transactions.update', $sharedTransaction->id) }}" method="post">
           @csrf
           @method('PUT')
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="user_id">User ID</label>
             <input type="text" class="form-control" id="user_id" name="user_id" value="{{ $sharedTransaction->user_id }}" required>
           </div>
           <div class="form-group">
             <label for="transaction_id">Transaction ID</label>
             <input type="text" class="form-control" id="transaction_id" name="transaction_id" value="{{ $sharedTransaction->transaction_id }}" required>
-          </div>
+          </div> --}}
           <div class="form-group">
             <label for="amount">Amount</label>
             <input type="text" class="form-control" id="amount" name="amount" value="{{ $sharedTransaction->amount }}" required>
           </div>
           <div class="form-group">
-            <label for="participants">Participants</label>
-            <input type="text" class="form-control" id="participants" name="participants" value="{{ $sharedTransaction->participants }}" required>
+            <label for="who_paid">Who Paid</label>
+            <input type="text" class="form-control" id="who_paid" name="who_paid" value="{{ $sharedTransaction->who_paid }}" required>
+          </div>
+          <div class="form-group">
+            <label for="number_of_participants">Number of Participants</label>
+            <input type="text" class="form-control" id="number_of_participants" name="number_of_participants" value="{{ $sharedTransaction->number_of_participants }}" required>
+          </div>
+          <div class="form-group">
+            <label for="name_of_participants">Name of Participants</label>
+            <input type="text" class="form-control" id="name_of_participants" name="name_of_participants" value="{{ $sharedTransaction->name_of_participants }}" required>
+          </div>
+          <div class="form-group">
+            <label for="amount_per_participant">Amount per Participant</label>
+            <input type="text" class="form-control" id="amount_per_participant" name="amount_per_participant" value="{{ $sharedTransaction->amount_per_participant }}" required>
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" name="date" value="{{ $sharedTransaction->date }}" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required>{{ $sharedTransaction->description }}</textarea>
           </div>
           <div class="form-group">
             <label for="approval_status">Approval Status</label>

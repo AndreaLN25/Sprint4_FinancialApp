@@ -28,13 +28,20 @@
               <h5 class="card-title">Shared Transaction ID: {{ $sharedTransaction->id }}</h5>
             </div>
             <div class="card-body">
-              <p class="card-text"><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
-              <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p>
+              {{-- <p class="card-text"><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
+              <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p> --}}
               <p class="card-text"><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
-              <p class="card-text"><strong>Participants:</strong> {{ $sharedTransaction->participants }}</p>
+              <p class="card-text"><strong>Who Paid:</strong> {{ $sharedTransaction->who_paid }}</p>
+              <p class="card-text"><strong>Number of Participants:</strong>
+                  {{ $sharedTransaction->number_of_participants }}</p>
+              <p class="card-text"><strong>Name of Participants:</strong>
+                  {{ $sharedTransaction->name_of_participants }}</p>
+              <p class="card-text"><strong>Amount per Participant:</strong>
+                  {{ $sharedTransaction->amount_per_participant }} € </p>
+              <p class="card-text"><strong>Date:</strong> {{ $sharedTransaction->date }}</p>
+              <p class="card-text"><strong>Description:</strong> {{ $sharedTransaction->description }}</p>
               <p class="card-text"><strong>Approval Status:</strong> {{ $sharedTransaction->approval_status }}</p>
               <p class="card-text"><strong>Note:</strong> {{ $sharedTransaction->note }}</p>
-              <!-- Repeat for other fields -->
             </div>
             <div class="card-footer">
               <div class="row">
@@ -54,6 +61,6 @@
         </div>
       @endforeach
     </div>
-  </div>
+  </div>  
 </body>
 </html>
