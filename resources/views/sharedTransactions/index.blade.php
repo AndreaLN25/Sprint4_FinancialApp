@@ -28,8 +28,8 @@
               <h5 class="card-title">Shared Transaction ID: {{ $sharedTransaction->id }}</h5>
             </div>
             <div class="card-body">
-              {{-- <p class="card-text"><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
-              <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p> --}}
+              <p class="card-text"><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
+              <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p>
               <p class="card-text"><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
               <p class="card-text"><strong>Who Paid:</strong> {{ $sharedTransaction->who_paid }}</p>
               <p class="card-text"><strong>Number of Participants:</strong>

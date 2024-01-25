@@ -55,7 +55,7 @@ class SharedTransactionController extends Controller
      */
     public function show(string $id){
         $sharedTransaction = SharedTransactionModel::find($id);
-        return view('shared_transactions.show', compact('sharedTransaction'));
+        return view('sharedTransactions.show', compact('sharedTransactions'));
     }
 
 
@@ -71,7 +71,7 @@ class SharedTransactionController extends Controller
                 ->with('error', 'Shared Transaction not found.');
         } */
 
-        return view('shared_transactions.edit', compact('sharedTransaction'));
+        return view('sharedTransactions.edit', compact('sharedTransactions'));
     }
 
 

@@ -15,14 +15,14 @@
       <h3>Add a Shared Transaction</h3>
       <form action="{{ route('shared_transactions.store') }}" method="post">
         @csrf
-        {{-- <div class="form-group">
+        <div class="form-group">
           <label for="user_id">User ID</label>
           <input type="text" class="form-control" id="user_id" name="user_id" required>
         </div>
         <div class="form-group">
           <label for="transaction_id">Transaction ID</label>
           <input type="text" class="form-control" id="transaction_id" name="transaction_id" required>
-        </div> --}}
+        </div>
         <div class="form-group">
           <label for="amount">Amount</label>
           <input type="text" class="form-control" id="amount" name="amount" required>
