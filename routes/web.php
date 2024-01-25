@@ -22,6 +22,12 @@ use Illuminate\Support\Facades\Route;
  */
 
 
+ //*****HomePage*****
+ Route::get('/', function () {
+    return view('index');
+ });
+
+
 
 //*******User********
 //UserLists
