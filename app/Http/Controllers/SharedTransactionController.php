@@ -55,7 +55,7 @@ class SharedTransactionController extends Controller
      */
     public function show(string $id){
         $sharedTransaction = SharedTransactionModel::find($id);
-        return view('sharedTransactions.show', compact('sharedTransactions'));
+        return view('sharedTransactions.show', compact('sharedTransaction'));
     }
 
 
@@ -71,7 +71,7 @@ class SharedTransactionController extends Controller
                 ->with('error', 'Shared Transaction not found.');
         } */
 
-        return view('sharedTransactions.edit', compact('sharedTransactions'));
+        return view('sharedTransactions.edit', compact('sharedTransaction'));
     }
 
 
@@ -102,7 +102,7 @@ class SharedTransactionController extends Controller
 
         $sharedTransaction->update($request->all());
 
-        return redirect()->route('shared_transactions.show', ['id' => $sharedTransaction->id])
+        return redirect()->route('shared_transactions.show', ['shared_transaction' => $sharedTransaction->id])
             ->with('success', 'Shared Transaction updated successfully');
     }
 
