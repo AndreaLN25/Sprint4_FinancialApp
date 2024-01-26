@@ -28,8 +28,8 @@
           <input type="text" class="form-control" id="amount" name="amount" required>
         </div>
         <div class="form-group">
-          <label for="who_paid">Who Paid</label>
-          <input type="text" class="form-control" id="who_paid" name="who_paid" required>
+          <label for="user_paid">Who Paid</label>
+          <input type="text" class="form-control" id="user_paid" name="user_paid" required>
         </div>
         <div class="form-group">
           <label for="number_of_participants">Number of Participants</label>
