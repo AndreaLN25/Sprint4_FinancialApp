@@ -16,6 +16,9 @@
         <div class="col ">
           <a class="btn btn-sm btn-success" href={{ route('shared_transactions.create') }}>Add Shared Transaction</a>
         </div>
+        <div class="col">
+          <a class="btn btn-sm btn-primary" href="{{ url('/') }}">Home</a>
+        </div>
       </div>
     </div>
   </nav>
