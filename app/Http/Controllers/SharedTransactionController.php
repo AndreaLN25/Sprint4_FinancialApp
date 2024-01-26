@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\SharedTransactionModel;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class SharedTransactionController extends Controller
@@ -20,10 +22,31 @@ class SharedTransactionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(){
-        return view('sharedTransactions.create');
+    public function create(Request $request){
+        $whoPaidOptions = SharedTransactionModel::distinct()->pluck('user_paid');
+        $number_of_participants = $request->input('number_of_participants');
+        $participantsOptions = UserModel::all();
+
+        $amount = $request->input('amount');
+        $amount_per_participant = $number_of_participants > 0 ? $amount / $number_of_participants : 0;
+        $request->merge(['amount_per_participant' => $amount_per_participant]);
+
+
+        //$participantsOptionsName = SharedTransactionModel::distinct()->pluck('name_of_participants')->unique();
+
+        return view('sharedTransactions.create', compact('whoPaidOptions', 'number_of_participants','participantsOptions','amount_per_participant'));
     }
 
+  /*   public function create(Request $request){
+        $whoPaidOptions = SharedTransactionModel::distinct()->pluck('user_paid');
+        $number_of_participants = $request->input('number_of_participants');
+    
+        // Obtener la lista de participantes de la base de datos
+        $participantsOptions = UserModel::all();
+    
+        return view('sharedTransactions.create', compact('whoPaidOptions', 'number_of_participants', 'participantsOptions'));
+    } */
+    
 
 
     /**
@@ -44,6 +67,7 @@ class SharedTransactionController extends Controller
             'note' => 'required|string',
         ]);
 
+        
         SharedTransactionModel::create($request->all());
         return redirect()->route('shared_transactions.index')
             ->with('success', 'Shared Transaction created successfully');

@@ -15,21 +15,25 @@
       <h3>Add a Shared Transaction</h3>
       <form action="{{ route('shared_transactions.store') }}" method="post">
         @csrf
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label for="user_id">User ID</label>
           <input type="text" class="form-control" id="user_id" name="user_id" required>
         </div>
         <div class="form-group">
           <label for="transaction_id">Transaction ID</label>
           <input type="text" class="form-control" id="transaction_id" name="transaction_id" required>
-        </div>
+        </div> --}}
         <div class="form-group">
           <label for="amount">Amount</label>
           <input type="text" class="form-control" id="amount" name="amount" required>
         </div>
         <div class="form-group">
           <label for="user_paid">Who Paid</label>
-          <input type="text" class="form-control" id="user_paid" name="user_paid" required>
+          <select class="form-control" id="user_paid" name="user_paid" required>
+            @foreach($whoPaidOptions as $whoPaidOption)
+              <option value="{{ $whoPaidOption }}">{{ $whoPaidOption }}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form-group">
           <label for="number_of_participants">Number of Participants</label>
@@ -37,11 +41,15 @@
         </div>
         <div class="form-group">
           <label for="name_of_participants">Name of Participants</label>
-          <input type="text" class="form-control" id="name_of_participants" name="name_of_participants" required>
+          <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
+              @foreach($participantsOptions as $participantOption)
+                  <option value="{{ $participantOption->id }}"> {{ $participantOption->full_name }}</option>
+              @endforeach
+          </select>
         </div>
         <div class="form-group">
           <label for="amount_per_participant">Amount per Participant</label>
-          <input type="text" class="form-control" id="amount_per_participant" name="amount_per_participant" required>
+          <input type="text" class="form-control" id="amount_per_participant" name="amount_per_participant" value="{{ old('amount_per_participant') }}" readonly>
         </div>
         <div class="form-group">
           <label for="date">Date</label>
