@@ -24,45 +24,51 @@
   </nav>
   <div class="container mt-5">
     <div class="row">
-      @foreach ($sharedTransactions as $sharedTransaction)
-        <div class="col-sm">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="card-title">Shared Transaction ID: {{ $sharedTransaction->id }}</h5>
-            </div>
-            <div class="card-body">
-              <p class="card-text"><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
-              <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p>
-              <p class="card-text"><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
-              <p class="card-text"><strong>Who Paid:</strong> {{ $sharedTransaction->user_paid }}</p>
-              <p class="card-text"><strong>Number of Participants:</strong>
-                  {{ $sharedTransaction->number_of_participants }}</p>
-              <p class="card-text"><strong>Name of Participants:</strong>
-                  {{ $sharedTransaction->name_of_participants }}</p>
-              <p class="card-text"><strong>Amount per Participant:</strong>
-                  {{ $sharedTransaction->amount_per_participant }} € </p>
-              <p class="card-text"><strong>Date:</strong> {{ $sharedTransaction->date }}</p>
-              <p class="card-text"><strong>Description:</strong> {{ $sharedTransaction->description }}</p>
-              <p class="card-text"><strong>Approval Status:</strong> {{ $sharedTransaction->approval_status }}</p>
-              <p class="card-text"><strong>Note:</strong> {{ $sharedTransaction->note }}</p>
-            </div>
-            <div class="card-footer">
-              <div class="row">
-                <div class="col-sm">
-                  <a href="{{ route('shared_transactions.edit', $sharedTransaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                </div>
-                <div class="col-sm">
-                  <form action="{{ route('shared_transactions.destroy', $sharedTransaction->id) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                  </form>
+      @if(count($sharedTransactions) > 0)
+        @foreach ($sharedTransactions as $sharedTransaction)
+          <div class="col-sm">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Shared Transaction ID: {{ $sharedTransaction->id }}</h5>
+              </div>
+              <div class="card-body">
+                <p class="card-text"><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
+                <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p>
+                <p class="card-text"><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
+                <p class="card-text"><strong>Who Paid:</strong> {{ $sharedTransaction->user_paid }}</p>
+                <p class="card-text"><strong>Number of Participants:</strong>
+                    {{ $sharedTransaction->number_of_participants }}</p>
+                <p class="card-text"><strong>Name of Participants:</strong>
+                    {{ $sharedTransaction->name_of_participants }}</p>
+                <p class="card-text"><strong>Amount per Participant:</strong>
+                    {{ $sharedTransaction->amount_per_participant }} € </p>
+                <p class="card-text"><strong>Date:</strong> {{ $sharedTransaction->date }}</p>
+                <p class="card-text"><strong>Description:</strong> {{ $sharedTransaction->description }}</p>
+                <p class="card-text"><strong>Approval Status:</strong> {{ $sharedTransaction->approval_status }}</p>
+                <p class="card-text"><strong>Note:</strong> {{ $sharedTransaction->note }}</p>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm">
+                    <a href="{{ route('shared_transactions.edit', $sharedTransaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                  </div>
+                  <div class="col-sm">
+                    <form action="{{ route('shared_transactions.destroy', $sharedTransaction->id) }}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       @endforeach
+      @else
+      <div class="col">
+        <p>No shared transactions found. Create a new shared transaction</a>.</p>
+      </div>
+      @endif
     </div>
   </div>  
 </body>

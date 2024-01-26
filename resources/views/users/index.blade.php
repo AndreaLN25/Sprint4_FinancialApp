@@ -24,33 +24,39 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
   </nav>
   <div class="container mt-5">
     <div class="row">
-      @foreach ($users as $user)
-        <div class="col-sm">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="card-title">{{ $user->first_name }} {{$user->last_name}}</h5>
-            </div>
-            <div class="card-body">
-              <p class="card-text">{{ $user->mailadress }}</p>
-            </div>
-            <div class="card-footer">
-              <div class="row">
-                <div class="col-sm">
-                  <a href="{{ route('users.edit', $user->id) }}"
-            class="btn btn-primary btn-sm">Edit</a>
-                </div>
-                <div class="col-sm">
-                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
+      @if(count($users) > 0)
+        @foreach ($users as $user)
+          <div class="col-sm">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">{{ $user->first_name }} {{$user->last_name}}</h5>
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{ $user->mailadress }}</p>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm">
+                    <a href="{{ route('users.edit', $user->id) }}"
+              class="btn btn-primary btn-sm">Edit</a>
+                  </div>
+                  <div class="col-sm">
+                      <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                      </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      @else
+      <div class="col">
+        <p>No users found.Create a new user</a>.</p>
+      </div>
+    @endif
     </div>
   </div>
 </body>

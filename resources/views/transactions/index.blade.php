@@ -24,42 +24,48 @@
   </nav>
   <div class="container mt-5">
     <div class="row">
-      @foreach ($transactions as $transaction)
-        <div class="col-sm">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="card-title">{{ $transaction->movement_type }} Transaction</h5>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Description: {{ $transaction->description }}</p>
-              <p class="card-text">Date: {{ $transaction->date }}</p>
-              <p class="card-text">Amount: {{ $transaction->amount }} €</p>
-              <p class="card-text">Completed: {{ $transaction->completed }}</p>
-              @if($transaction->movement_type === 'income')
-              <p class="card-text">Category Income: {{ $transaction->category_income }}</p>
-              <p class="card-text">Payment Method Income: {{ $transaction->payment_method_income }}</p>
-            @else
-              <p class="card-text">Category Expense: {{ $transaction->category_expense }}</p>
-              <p class="card-text">Payment Method Expense: {{ $transaction->payment_method_expense }}</p>
-            @endif
-            </div>
-            <div class="card-footer">
-              <div class="row">
-                <div class="col-sm">
-                  <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                </div>
-                <div class="col-sm">
-                    <form action="{{ route('transactions.destroy', $transaction->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
+      @if(count($transactions) > 0)
+        @foreach ($transactions as $transaction)
+          <div class="col-sm">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">{{ $transaction->movement_type }} Transaction</h5>
+              </div>
+              <div class="card-body">
+                <p class="card-text">Description: {{ $transaction->description }}</p>
+                <p class="card-text">Date: {{ $transaction->date }}</p>
+                <p class="card-text">Amount: {{ $transaction->amount }} €</p>
+                <p class="card-text">Completed: {{ $transaction->completed }}</p>
+                @if($transaction->movement_type === 'income')
+                <p class="card-text">Category Income: {{ $transaction->category_income }}</p>
+                <p class="card-text">Payment Method Income: {{ $transaction->payment_method_income }}</p>
+              @else
+                <p class="card-text">Category Expense: {{ $transaction->category_expense }}</p>
+                <p class="card-text">Payment Method Expense: {{ $transaction->payment_method_expense }}</p>
+              @endif
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm">
+                    <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                  </div>
+                  <div class="col-sm">
+                      <form action="{{ route('transactions.destroy', $transaction->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                      </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      @else
+      <div class="col">
+        <p>No transactions found.Create a new transaction</a>.</p>
+      </div>
+    @endif
     </div>
   </div>
 </body>

@@ -12,6 +12,7 @@ class AllUsersSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void{
-        UserModel::factory(10)->create();
+        $numberOfRecords = 10;
+        UserModel::factory($numberOfRecords)->create();
     }
 }
