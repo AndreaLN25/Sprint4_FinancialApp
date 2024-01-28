@@ -37,16 +37,6 @@ class SharedTransactionController extends Controller
         return view('sharedTransactions.create', compact('whoPaidOptions', 'number_of_participants','participantsOptions','amount_per_participant'));
     }
 
-  /*   public function create(Request $request){
-        $whoPaidOptions = SharedTransactionModel::distinct()->pluck('user_paid');
-        $number_of_participants = $request->input('number_of_participants');
-    
-        // Obtener la lista de participantes de la base de datos
-        $participantsOptions = UserModel::all();
-    
-        return view('sharedTransactions.create', compact('whoPaidOptions', 'number_of_participants', 'participantsOptions'));
-    } */
-    
 
 
     /**
@@ -58,7 +48,7 @@ class SharedTransactionController extends Controller
             'transaction_id' => 'required|exists:all_transactions,id', */
             'amount' => 'nullable|numeric|min:0',
             'user_paid' => 'required|string',
-            //'number_of_participants' => 'required|integer|min:1',
+            //'number_of_participants' => 'required|array|min:1',
             'name_of_participants' => 'required|string',
             //'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
@@ -67,8 +57,8 @@ class SharedTransactionController extends Controller
             'note' => 'required|string',
         ]);
 
-            dd($request->all());
-            dd("Reached here");
+            /* dd($request->all());
+            dd("Reached here"); */
 
 
         $nameOfParticipants = implode(', ', $request->input('name_of_participants'));
@@ -103,12 +93,15 @@ class SharedTransactionController extends Controller
     public function edit(string $id){
         $sharedTransaction = SharedTransactionModel::find($id);
 
-        /* if (!$sharedTransaction) {
+        if (!$sharedTransaction) {
             return redirect()->route('shared_transactions.index')
                 ->with('error', 'Shared Transaction not found.');
-        } */
+        }
+        $whoPaidOptions = SharedTransactionModel::distinct()->pluck('user_paid');
 
-        return view('sharedTransactions.edit', compact('sharedTransaction'));
+        $amount_per_participant = $sharedTransaction->number_of_participants > 0 ? $sharedTransaction->amount / $sharedTransaction->number_of_participants : 0;
+
+        return view('sharedTransactions.edit', compact('sharedTransaction', 'amount_per_participant','whoPaidOptions'));
     }
 
 
@@ -118,13 +111,13 @@ class SharedTransactionController extends Controller
      */
     public function update(Request $request, string $id){
         $request->validate([
-            'user_id' => 'required|exists:all_users,id',
-            'transaction_id' => 'required|exists:all_transactions,id',
+            //'user_id' => 'required|exists:all_users,id',
+            //'transaction_id' => 'required|exists:all_transactions,id',
             'amount' => 'nullable|numeric|min:0',
-            'user_paid' => 'required|integer',
-            //'number_of_participants' => 'required|integer|min:1',
+            'user_paid' => 'required|string',
+            'number_of_participants' => 'required|integer|min:1',
             'name_of_participants' => 'required|array',
-            //'amount_per_participant' => 'nullable|numeric|min:0',
+            'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
             'description' => 'required|string',
             'approval_status' => 'required|in:pending,approved,rejected',

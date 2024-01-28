@@ -31,7 +31,13 @@
           </div>
           <div class="form-group">
             <label for="user_paid">Who Paid</label>
-            <input type="text" class="form-control" id="user_paid" name="user_paid" value="{{ $sharedTransaction->user_paid }}" required>
+            <select class="form-control" id="user_paid" name="user_paid" required>
+              @foreach($whoPaidOptions as $whoPaidOption)
+                <option value="{{ $whoPaidOption }}" {{ $sharedTransaction->user_paid === $whoPaidOption ? 'selected' : '' }}>
+                  {{ $whoPaidOption }}
+                </option>
+              @endforeach
+            </select>
           </div>
           <div class="form-group">
             <label for="number_of_participants">Number of Participants</label>
