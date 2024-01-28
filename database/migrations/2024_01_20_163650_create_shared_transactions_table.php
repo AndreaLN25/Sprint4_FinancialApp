@@ -16,7 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('transaction_id');
             $table->decimal('amount', 10, 2);
-            $table->string('user_paid');
+            //$table->string('user_paid');
+            $table->json('user_paid');
             //$table->foreign('user_paid')->references('id')->on('all_users');
             //$table->foreign('user_paid')->references('full_name')->on('all_users');
             $table->unsignedInteger('number_of_participants');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+//use App\Http\Controllers\Controller;
 use App\Models\SharedTransactionModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
@@ -54,19 +54,31 @@ class SharedTransactionController extends Controller
      */
     public function store(Request $request){
         $request->validate([
-            'user_id' => 'required|exists:all_users,id',
-            'transaction_id' => 'required|exists:all_transactions,id',
+            /* 'user_id' => 'required|exists:all_users,id',
+            'transaction_id' => 'required|exists:all_transactions,id', */
             'amount' => 'nullable|numeric|min:0',
             'user_paid' => 'required|string',
-            'number_of_participants' => 'required|integer|min:1',
+            //'number_of_participants' => 'required|integer|min:1',
             'name_of_participants' => 'required|string',
-            'amount_per_participant' => 'nullable|numeric|min:0',
+            //'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
             'description' => 'required|string',
             'approval_status' => 'required|in:pending,approved,rejected',
             'note' => 'required|string',
         ]);
 
+            dd($request->all());
+            dd("Reached here");
+
+
+        $nameOfParticipants = implode(', ', $request->input('name_of_participants'));
+        $request->merge(['name_of_participants' => $nameOfParticipants]);
+
+        /* $sharedTransaction = new SharedTransactionModel($request->all());
+        $sharedTransaction->save();
+    
+        return redirect()->route('shared_transactions.index')
+            ->with('success', 'Shared Transaction created successfully'); */
         
         SharedTransactionModel::create($request->all());
         return redirect()->route('shared_transactions.index')
@@ -110,9 +122,9 @@ class SharedTransactionController extends Controller
             'transaction_id' => 'required|exists:all_transactions,id',
             'amount' => 'nullable|numeric|min:0',
             'user_paid' => 'required|integer',
-            'number_of_participants' => 'required|integer|min:1',
-            'name_of_participants' => 'required|string',
-            'amount_per_participant' => 'nullable|numeric|min:0',
+            //'number_of_participants' => 'required|integer|min:1',
+            'name_of_participants' => 'required|array',
+            //'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
             'description' => 'required|string',
             'approval_status' => 'required|in:pending,approved,rejected',

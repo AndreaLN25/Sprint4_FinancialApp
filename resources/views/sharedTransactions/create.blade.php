@@ -47,10 +47,10 @@
               @endforeach
           </select>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label for="amount_per_participant">Amount per Participant</label>
           <input type="text" class="form-control" id="amount_per_participant" name="amount_per_participant" value="{{ old('amount_per_participant') }}" readonly>
-        </div>
+        </div> --}}
         <div class="form-group">
           <label for="date">Date</label>
           <input type="date" class="form-control" id="date" name="date" required>

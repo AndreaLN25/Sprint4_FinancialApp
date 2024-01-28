@@ -16,9 +16,9 @@ class SharedTransactionModel extends Model
         'transaction_id',
         'amount',
         'user_paid',
-        'number_of_participants',
+       // 'number_of_participants',
         'name_of_participants',
-        'amount_per_participant',
+        //'amount_per_participant',
         'date',
         'description',
         'approval_status',
@@ -33,5 +33,9 @@ class SharedTransactionModel extends Model
     public function transaction()
     {
         return $this->belongsTo(TransactionModel::class, 'transaction_id');
+    }
+    public function userPaid()
+    {
+        return $this->belongsTo(UserModel::class, 'user_paid', 'full_name');
     }
 }
