@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SharedTransactionModel;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class SharedTransactionController extends Controller
@@ -20,10 +21,13 @@ class SharedTransactionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(){
+   /*  public function create(){
         return view('sharedTransactions.create');
+    } */
+    public function create(){
+        $allUsers = UserModel::all(); // Obtén la lista de todos los usuarios
+        return view('sharedTransactions.create', compact('allUsers'));
     }
-
 
 
     /**
@@ -32,9 +36,10 @@ class SharedTransactionController extends Controller
     public function store(Request $request){
         $request->validate([
             'user_id' => 'required|exists:all_users,id',
-            'transaction_id' => 'required|exists:all_transactions,id',
+            //'transaction_id' => 'required|exists:all_transactions,id',
             'amount' => 'nullable|numeric|min:0',
-            'user_paid' => 'required|string',
+            //'user_paid' => 'required|string',
+            'user_paid' => 'sometimes|required|exists:all_users,id',
             'number_of_participants' => 'required|integer|min:1',
             'name_of_participants' => 'required|string',
             'amount_per_participant' => 'nullable|numeric|min:0',
@@ -83,9 +88,9 @@ class SharedTransactionController extends Controller
     public function update(Request $request, string $id){
         $request->validate([
             'user_id' => 'required|exists:all_users,id',
-            'transaction_id' => 'required|exists:all_transactions,id',
+            //'transaction_id' => 'required|exists:all_transactions,id',
             'amount' => 'nullable|numeric|min:0',
-            'user_paid' => 'required|integer',
+            //'user_paid' => 'required|integer',
             'number_of_participants' => 'required|integer|min:1',
             'name_of_participants' => 'required|string',
             'amount_per_participant' => 'nullable|numeric|min:0',
