@@ -69,5 +69,22 @@
     </div>
   </div>
 </div>
+<script>
+  // Agrega un evento 'input' a los campos amount y number_of_participants
+  document.getElementById('amount').addEventListener('input', updateAmountPerParticipant);
+  document.getElementById('number_of_participants').addEventListener('input', updateAmountPerParticipant);
+
+  function updateAmountPerParticipant() {
+    // Obtiene los valores actuales de amount y number_of_participants
+    var amount = parseFloat(document.getElementById('amount').value) || 0;
+    var numberOfParticipants = parseInt(document.getElementById('number_of_participants').value) || 1;
+
+    // Calcula amount_per_participant
+    var amountPerParticipant = numberOfParticipants > 0 ? amount / numberOfParticipants : 0;
+
+    // Actualiza el campo amount_per_participant en tiempo real
+    document.getElementById('amount_per_participant').value = amountPerParticipant.toFixed(2);
+  }
+</script>
 </body>
 </html>
