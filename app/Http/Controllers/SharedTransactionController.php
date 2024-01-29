@@ -25,7 +25,7 @@ class SharedTransactionController extends Controller
         return view('sharedTransactions.create');
     } */
     public function create(){
-        $allUsers = UserModel::all(); // Obtén la lista de todos los usuarios
+        $allUsers = UserModel::all(); 
         return view('sharedTransactions.create', compact('allUsers'));
     }
 
@@ -41,12 +41,16 @@ class SharedTransactionController extends Controller
             //'user_paid' => 'required|string',
             'user_paid' => 'sometimes|required|exists:all_users,id',
             'number_of_participants' => 'required|integer|min:1',
-            'name_of_participants' => 'required|string',
+            'name_of_participants' => 'required|array',
             'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
             'description' => 'required|string',
             'approval_status' => 'required|in:pending,approved,rejected',
             'note' => 'required|string',
+        ]);
+
+        $request->merge([
+            'name_of_participants' => json_encode($request->input('name_of_participants')),
         ]);
 
         SharedTransactionModel::create($request->all());
@@ -61,7 +65,12 @@ class SharedTransactionController extends Controller
      */
     public function show(string $id){
         $sharedTransaction = SharedTransactionModel::find($id);
-        return view('sharedTransactions.show', compact('sharedTransaction'));
+
+        $participantIds = json_decode($sharedTransaction->name_of_participants);
+
+        $participantNames = UserModel::whereIn('id', $participantIds)->pluck('full_name')->toArray();
+
+        return view('sharedTransactions.show', compact('sharedTransaction','participantNames'));
     }
 
 
@@ -92,7 +101,7 @@ class SharedTransactionController extends Controller
             'amount' => 'nullable|numeric|min:0',
             //'user_paid' => 'required|integer',
             'number_of_participants' => 'required|integer|min:1',
-            'name_of_participants' => 'required|string',
+            'name_of_participants' => 'required|array',
             'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
             'description' => 'required|string',

@@ -25,6 +25,10 @@ class SharedTransactionModel extends Model
         'note',
     ];
 
+    protected $casts = [
+        'name_of_participants' => 'json',
+    ];
+
     public function user()
     {
         return $this->belongsTo(UserModel::class, 'user_id');
