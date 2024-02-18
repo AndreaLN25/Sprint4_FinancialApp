@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('shared_transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            //$table->unsignedBigInteger('transaction_id');
+            $table->unsignedBigInteger('transaction_id');
             $table->decimal('amount', 10, 2);
             //$table->string('user_paid');
-            $table->BigInteger('user_paid')->unsigned();
-            $table->foreign('user_paid')->references('id')->on('all_users'); 
+            $table->json('user_paid');
+            //$table->foreign('user_paid')->references('id')->on('all_users');
             //$table->foreign('user_paid')->references('full_name')->on('all_users');
             $table->unsignedInteger('number_of_participants');
             $table->string('name_of_participants');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->enum('approval_status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->text('note');
             $table->foreign('user_id')->references('id')->on('all_users')->onDelete('cascade');
-            
+            $table->foreign('transaction_id')->references('id')->on('all_transactions')->onDelete('cascade');
             $table->timestamps();
         });
     }

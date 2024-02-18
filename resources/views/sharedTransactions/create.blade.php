@@ -15,12 +15,11 @@
       <h3>Add a Shared Transaction</h3>
       <form action="{{ route('shared_transactions.store') }}" method="post">
         @csrf
-        <div class="form-group">
-          <label for="user_id">User ID-who paid</label>
-
+        {{-- <div class="form-group">
+          <label for="user_id">User ID</label>
           <input type="text" class="form-control" id="user_id" name="user_id" required>
         </div>
-        {{-- <div class="form-group">
+        <div class="form-group">
           <label for="transaction_id">Transaction ID</label>
           <input type="text" class="form-control" id="transaction_id" name="transaction_id" required>
         </div> --}}
@@ -28,14 +27,14 @@
           <label for="amount">Amount</label>
           <input type="text" class="form-control" id="amount" name="amount" required>
         </div>
-        <div class="mb-3">
-          <label for="user_paid" class="form-label">Who Paid</label>
+        <div class="form-group">
+          <label for="user_paid">Who Paid</label>
           <select class="form-control" id="user_paid" name="user_paid" required>
-              @foreach($allUsers as $user)
-                  <option value="{{ $user->id }}">{{ $user->full_name }}</option>
-              @endforeach
+            @foreach($whoPaidOptions as $whoPaidOption)
+              <option value="{{ $whoPaidOption }}">{{ $whoPaidOption }}</option>
+            @endforeach
           </select>
-      </div>
+        </div>
         <div class="form-group">
           <label for="number_of_participants">Number of Participants</label>
           <input type="text" class="form-control" id="number_of_participants" name="number_of_participants" required>
@@ -43,8 +42,8 @@
         <div class="form-group">
           <label for="name_of_participants">Name of Participants</label>
           <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
-              @foreach($allUsers as $user)
-                  <option value="{{ $user->id }}">{{ $user->full_name }}</option>
+              @foreach($participantsOptions as $participantOption)
+                  <option value="{{ $participantOption->id }}"> {{ $participantOption->full_name }}</option>
               @endforeach
           </select>
         </div>
@@ -78,22 +77,5 @@
     </div>
   </div>
 </div>
-<script>
-  // Agrega un evento 'input' a los campos amount y number_of_participants
-  document.getElementById('amount').addEventListener('input', updateAmountPerParticipant);
-  document.getElementById('number_of_participants').addEventListener('input', updateAmountPerParticipant);
-
-  function updateAmountPerParticipant() {
-    // Obtiene los valores actuales de amount y number_of_participants
-    var amount = parseFloat(document.getElementById('amount').value) || 0;
-    var numberOfParticipants = parseInt(document.getElementById('number_of_participants').value) || 1;
-
-    // Calcula amount_per_participant
-    var amountPerParticipant = numberOfParticipants > 0 ? amount / numberOfParticipants : 0;
-
-    // Actualiza el campo amount_per_participant en tiempo real
-    document.getElementById('amount_per_participant').value = amountPerParticipant.toFixed(2);
-  }
-</script>
 </body>
 </html>
