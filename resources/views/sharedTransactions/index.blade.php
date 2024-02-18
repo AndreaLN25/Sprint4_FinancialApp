@@ -36,7 +36,12 @@
                 <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p> --}}
                 <p class="card-text"><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
                 {{-- <p class="card-text"><strong>Who Paid:</strong> {{ $sharedTransaction->user_paid }}</p> --}}
-                <p class="card-text"><strong>Who Paid: </strong>{{ $sharedTransaction->payerUser->full_name }} </p>
+                <p class="card-text"><strong>Who Paid: </strong></p>
+                    @isset($sharedTransaction->payerUser)
+                    {{ $sharedTransaction->payerUser->full_name }}
+                    @else
+                        No payer specified
+                    @endisset
                 <p class="card-text"><strong>Number of Participants:</strong>
                     {{ $sharedTransaction->number_of_participants }}</p>
                 <p class="card-text"><strong>Name of Participants:</strong>
