@@ -9,11 +9,16 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
   <title>Users</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+            <a class="navbar-brand h1" href="#">Update User</a>
+            <a href="{{ route('users.index') }}" class="btn btn-primary">Back to Users</a>
+        </div>
+    </nav>
 <div class="container h-100 mt-5">
     <div class="row h-100 justify-content-center align-items-center">
       <div class="col-10 col-md-8 col-lg-6">
         @if($user)
-            <h3>Update User</h3>
             <form action="{{ route('users.update', $user->id) }}" method="post">
               @csrf
               @method('PUT')
