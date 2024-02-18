@@ -52,7 +52,19 @@ class SharedTransactionController extends Controller
             'name_of_participants' => json_encode($request->input('name_of_participants')),
         ]);
 
-        SharedTransactionModel::create($request->all());
+        // SharedTransactionModel::create($request->all());
+        SharedTransactionModel::create([
+            'user_id' => $request->user_id,
+            'amount' => $request->amount,
+            'user_paid' => $request->user_paid,
+            'number_of_participants' => $request->number_of_participants,
+            'name_of_participants' => $request->name_of_participants,
+            'amount_per_participant' => $request->amount_per_participant,
+            'date' => $request->date,
+            'description' => $request->description,
+            'approval_status' => $request->approval_status,
+            'note' => $request->note,
+        ]);
         return redirect()->route('shared_transactions.index')
             ->with('success', 'Shared Transaction created successfully');
     }

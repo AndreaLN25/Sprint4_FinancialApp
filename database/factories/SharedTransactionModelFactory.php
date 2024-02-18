@@ -33,7 +33,7 @@ class SharedTransactionModelFactory extends Factory
 
             return [
                 'user_id' => UserModel::factory()->create()->id,
-                'transaction_id' => TransactionModel::factory()->create()->id,
+                //'transaction_id' => TransactionModel::factory()->create()->id,
                 'amount' => $totalAmount,
                 'user_paid' => UserModel::factory()->create()->full_name,
                 'number_of_participants' => count($participants),

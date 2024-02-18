@@ -23,10 +23,10 @@
     </div>
   </nav>
   <div class="container mt-5">
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
       @if(count($sharedTransactions) > 0)
         @foreach ($sharedTransactions as $sharedTransaction)
-          <div class="col-sm">
+          <div class="col-sm mb-3">
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Shared Transaction ID: {{ $sharedTransaction->id }}</h5>
@@ -36,13 +36,27 @@
                 <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p> --}}
                 <p class="card-text"><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
                 {{-- <p class="card-text"><strong>Who Paid:</strong> {{ $sharedTransaction->user_paid }}</p> --}}
-                <p class="card-text"><strong>Who Paid: </strong>{{ $sharedTransaction->payerUser->full_name }} </p>
+                <p class="card-text"><strong>Who Paid: </strong></p>
+                    @isset($sharedTransaction->payerUser)
+                    {{ $sharedTransaction->payerUser->full_name }}
+                    @else
+                        No payer specified
+                    @endisset
                 <p class="card-text"><strong>Number of Participants:</strong>
                     {{ $sharedTransaction->number_of_participants }}</p>
                 <p class="card-text"><strong>Name of Participants:</strong>
-                    @foreach(json_decode($sharedTransaction->name_of_participants) as $participantId)
-                      {{ \App\Models\UserModel::find($participantId)->full_name }}<br>
-                    @endforeach
+                    @if($sharedTransaction->name_of_participants !== null)
+                        @foreach(json_decode($sharedTransaction->name_of_participants) as $participantId)
+                        {{-- {{ \App\Models\UserModel::find($participantId)->full_name }}<br> --}}
+                            @if($user = \App\Models\UserModel::find($participantId))
+                              {{ $user->full_name }}<br>
+                            @else
+                                Unknown User<br>
+                            @endif
+                        @endforeach
+                    @else
+                        No participants specified
+                    @endif
                 </p>
                 <p class="card-text"><strong>Amount per Participant:</strong>
                     {{ $sharedTransaction->amount_per_participant }} € </p>
@@ -57,7 +71,7 @@
                     <a href="{{ route('shared_transactions.edit', $sharedTransaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
                   </div>
                   <div class="col-sm">
-                    <form action="{{ route('shared_transactions.destroy', $sharedTransaction->id) }}" method="post">
+                    <form id="delete-form-{{ $sharedTransaction->id }}" action="{{ route('shared_transactions.destroy', $sharedTransaction->id) }}" method="post" onsubmit="return confirmDelete()">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -74,6 +88,11 @@
       </div>
       @endif
     </div>
-  </div>  
+  </div>
+  <script>
+    function confirmDelete() {
+      return confirm('Are you sure you want to delete this shared transaction?');
+    }
+  </script>
 </body>
 </html>

@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand h1" href="#">Financial Main Page</a>
+            <a class="navbar-brand h1" href="#">HOME</a>
         </div>
     </nav>
     <div class="container mt-5">

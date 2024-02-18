@@ -11,7 +11,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <div class="container-fluid">
-      <a class="navbar-brand h1" href="{{ route('transactions.index') }}">CRUDTransactions</a>
+      <a class="navbar-brand h1" href="{{ route('transactions.index') }}">All Transactions</a>
       <div class="justify-end ">
         <div class="col ">
           <a class="btn btn-sm btn-success" href="{{ route('transactions.create') }}">Add Transaction</a>
@@ -23,10 +23,10 @@
     </div>
   </nav>
   <div class="container mt-5">
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
       @if(count($transactions) > 0)
         @foreach ($transactions as $transaction)
-          <div class="col-sm">
+          <div class="col-sm mb-3">
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">{{ $transaction->movement_type }} Transaction</h5>
@@ -50,7 +50,7 @@
                     <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
                   </div>
                   <div class="col-sm">
-                      <form action="{{ route('transactions.destroy', $transaction->id) }}" method="post">
+                    <form id="delete-form-{{ $transaction->id }}" action="{{ route('transactions.destroy', $transaction->id) }}" method="post" onsubmit="return confirmDelete()">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -68,5 +68,10 @@
     @endif
     </div>
   </div>
+  <script>
+    function confirmDelete() {
+      return confirm('Are you sure you want to delete this transaction?');
+    }
+  </script>
 </body>
 </html>
