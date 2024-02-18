@@ -31,6 +31,9 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
         <div class="form-group">
           <label for="mailadress">Email address</label>
           <input type="email" class="form-control" id="mailadress" name="mailadress" required>
+          @error('mailadress')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
         </div>
         {{-- <div class="form-group">
           <label for="password">Password</label>

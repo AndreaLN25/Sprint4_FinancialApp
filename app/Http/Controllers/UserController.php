@@ -33,6 +33,8 @@ class UserController extends Controller
             'last_name'=>'required|string',
             'mailadress'=>'required|email|unique:all_users,mailadress',
             //'password'=>'required|string'
+        ], [
+            'mailadress.unique' => 'User already registered.',
         ]);
 
         UserModel::create($request->all());
