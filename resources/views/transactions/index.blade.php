@@ -33,6 +33,7 @@
               </div>
               <div class="card-body">
                 <p class="card-text">Description: {{ $transaction->description }}</p>
+                <p class="card-text">User: {{ $transaction->user ? $transaction->user->name : 'Unknown User' }}</p>
                 <p class="card-text">Date: {{ $transaction->date }}</p>
                 <p class="card-text">Amount: {{ $transaction->amount }} €</p>
                 <p class="card-text">Completed: {{ $transaction->completed }}</p>
