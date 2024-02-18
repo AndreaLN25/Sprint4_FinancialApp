@@ -49,7 +49,6 @@ class TransactionController extends Controller
     }
 
 
-
     /**
      * Display the specified resource.
      */
@@ -57,7 +56,6 @@ class TransactionController extends Controller
         $transaction = TransactionModel::find($id);
         return view('transactions.show', compact('transaction'));
     }
-
 
 
     /**
@@ -73,11 +71,10 @@ class TransactionController extends Controller
     }
 
 
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id){        
+    public function update(Request $request, string $id){
         $request->validate([
             'movement_type' => ['required', Rule::in(['income', 'expense'])],
             'description' => 'required|string',
@@ -89,7 +86,7 @@ class TransactionController extends Controller
             'payment_method_income' => $request->input('movement_type') == 'income' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum'])] : 'nullable',
             'payment_method_expense' => $request->input('movement_type') == 'expense' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum', 'card'])] : 'nullable',
         ]);
-        
+
         $transaction = TransactionModel::find($id);
 
         if (!$transaction) {
@@ -102,7 +99,6 @@ class TransactionController extends Controller
         return redirect()->route('transactions.show', ['id' => $transaction->id])
             ->with('success', 'Transaction updated successfully');
     }
-
 
 
     /**

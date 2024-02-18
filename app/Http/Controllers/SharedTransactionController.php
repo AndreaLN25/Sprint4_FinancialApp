@@ -17,7 +17,6 @@ class SharedTransactionController extends Controller
     }
 
 
-
     /**
      * Show the form for creating a new resource.
      */
@@ -25,7 +24,7 @@ class SharedTransactionController extends Controller
         return view('sharedTransactions.create');
     } */
     public function create(){
-        $allUsers = UserModel::all(); 
+        $allUsers = UserModel::all();
         return view('sharedTransactions.create', compact('allUsers'));
     }
 
@@ -59,7 +58,6 @@ class SharedTransactionController extends Controller
     }
 
 
-
     /**
      * Display the specified resource.
      */
@@ -72,7 +70,6 @@ class SharedTransactionController extends Controller
 
         return view('sharedTransactions.show', compact('sharedTransaction','participantNames'));
     }
-
 
 
     /**
@@ -88,7 +85,6 @@ class SharedTransactionController extends Controller
 
         return view('sharedTransactions.edit', compact('sharedTransaction'));
     }
-
 
 
     /**
