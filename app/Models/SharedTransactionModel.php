@@ -40,6 +40,6 @@ class SharedTransactionModel extends Model
     } */
     public function payerUser()
     {
-        return $this->belongsTo(UserModel::class, 'user_paid');
+        return $this->belongsTo(UserModel::class, 'user_paid','id');
     }
 }

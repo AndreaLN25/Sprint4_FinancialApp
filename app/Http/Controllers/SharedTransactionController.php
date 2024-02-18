@@ -34,12 +34,12 @@ class SharedTransactionController extends Controller
      */
     public function store(Request $request){
         $request->validate([
-            'user_id' => 'required|exists:all_users,id',
+            //'user_id' => 'required|exists:all_users,id',
             //'transaction_id' => 'required|exists:all_transactions,id',
             'amount' => 'nullable|numeric|min:0',
-            //'user_paid' => 'required|string',
-            'user_paid' => 'sometimes|required|exists:all_users,id',
-            'number_of_participants' => 'required|integer|min:1',
+            'user_paid' => 'required|exists:all_users,id',
+            //'user_paid' => 'sometimes|required|exists:all_users,id',
+            //'number_of_participants' => 'required|integer|min:1',
             'name_of_participants' => 'required|array',
             'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
@@ -54,10 +54,10 @@ class SharedTransactionController extends Controller
 
         // SharedTransactionModel::create($request->all());
         SharedTransactionModel::create([
-            'user_id' => $request->user_id,
+            'user_id' => $request->user_paid,
             'amount' => $request->amount,
             'user_paid' => $request->user_paid,
-            'number_of_participants' => $request->number_of_participants,
+            //'number_of_participants' => $request->number_of_participants,
             'name_of_participants' => $request->name_of_participants,
             'amount_per_participant' => $request->amount_per_participant,
             'date' => $request->date,
