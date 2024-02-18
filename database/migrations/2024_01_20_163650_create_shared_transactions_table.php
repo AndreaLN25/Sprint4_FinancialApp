@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('description');
             $table->enum('approval_status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->text('note');
-            $table->foreign('user_id')->references('id')->on('all_users')->onDelete('cascade');
-            
+            $table->foreign('user_id')->references('id')->on('all_users');
+
             $table->timestamps();
         });
     }
