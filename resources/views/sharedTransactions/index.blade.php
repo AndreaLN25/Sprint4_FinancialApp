@@ -41,7 +41,12 @@
                     {{ $sharedTransaction->number_of_participants }}</p>
                 <p class="card-text"><strong>Name of Participants:</strong>
                     @foreach(json_decode($sharedTransaction->name_of_participants) as $participantId)
-                      {{ \App\Models\UserModel::find($participantId)->full_name }}<br>
+                      {{-- {{ \App\Models\UserModel::find($participantId)->full_name }}<br> --}}
+                      @if($user = \App\Models\UserModel::find($participantId))
+                      {{ $user->full_name }}<br>
+                  @else
+                      Unknown User<br>
+                  @endif
                     @endforeach
                 </p>
                 <p class="card-text"><strong>Amount per Participant:</strong>
@@ -57,7 +62,7 @@
                     <a href="{{ route('shared_transactions.edit', $sharedTransaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
                   </div>
                   <div class="col-sm">
-                    <form action="{{ route('shared_transactions.destroy', $sharedTransaction->id) }}" method="post">
+                    <form id="delete-form-{{ $sharedTransaction->id }}" action="{{ route('shared_transactions.destroy', $sharedTransaction->id) }}" method="post" onsubmit="return confirmDelete()">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -74,6 +79,11 @@
       </div>
       @endif
     </div>
-  </div>  
+  </div>
+  <script>
+    function confirmDelete() {
+      return confirm('Are you sure you want to delete this shared transaction?');
+    }
+  </script>
 </body>
 </html>

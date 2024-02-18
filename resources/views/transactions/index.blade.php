@@ -50,7 +50,7 @@
                     <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
                   </div>
                   <div class="col-sm">
-                      <form action="{{ route('transactions.destroy', $transaction->id) }}" method="post">
+                    <form id="delete-form-{{ $transaction->id }}" action="{{ route('transactions.destroy', $transaction->id) }}" method="post" onsubmit="return confirmDelete()">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -68,5 +68,10 @@
     @endif
     </div>
   </div>
+  <script>
+    function confirmDelete() {
+      return confirm('Are you sure you want to delete this transaction?');
+    }
+  </script>
 </body>
 </html>
