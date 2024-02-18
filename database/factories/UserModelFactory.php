@@ -20,7 +20,7 @@ class UserModelFactory extends Factory
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'mailadress' => $this->faker->unique()->safeEmail,
-            'password' => bcrypt('password123'),
+            //'password' => bcrypt('password123'),
         ];
     }
 }
