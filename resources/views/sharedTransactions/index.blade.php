@@ -35,11 +35,15 @@
                 {{-- <p class="card-text"><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
                 <p class="card-text"><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p> --}}
                 <p class="card-text"><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
-                <p class="card-text"><strong>Who Paid:</strong> {{ $sharedTransaction->user_paid }}</p>
+                {{-- <p class="card-text"><strong>Who Paid:</strong> {{ $sharedTransaction->user_paid }}</p> --}}
+                <p class="card-text"><strong>Who Paid: </strong>{{ $sharedTransaction->payerUser->full_name }} </p>
                 <p class="card-text"><strong>Number of Participants:</strong>
                     {{ $sharedTransaction->number_of_participants }}</p>
                 <p class="card-text"><strong>Name of Participants:</strong>
-                    {{ $sharedTransaction->name_of_participants }}</p>
+                    @foreach(json_decode($sharedTransaction->name_of_participants) as $participantId)
+                      {{ \App\Models\UserModel::find($participantId)->full_name }}<br>
+                    @endforeach
+                </p>
                 <p class="card-text"><strong>Amount per Participant:</strong>
                     {{ $sharedTransaction->amount_per_participant }} € </p>
                 <p class="card-text"><strong>Date:</strong> {{ $sharedTransaction->date }}</p>

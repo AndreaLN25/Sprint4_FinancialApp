@@ -28,10 +28,8 @@ class TransactionModel extends Model
         return $this->hasMany(UserModel::class);
         //return $this->belongsToMany(UserModel::class);
     }
-    public function sharedTransactions(){
-        //return $this->hasMany(SharedTransactionModel::class, 'transaction_id','id');
-        return $this->hasMany(SharedTransactionModel::class, 'transaction_id', 'id');
-
-}
+    /* public function sharedTransactions(){
+        return $this->hasMany(SharedTransactionModel::class, 'transaction_id','id');
+    } */
 
 }
