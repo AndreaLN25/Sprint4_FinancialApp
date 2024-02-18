@@ -11,7 +11,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <div class="container-fluid">
-      <a class="navbar-brand h1" href="{{ route('transactions.index') }}">CRUDTransactions</a>
+      <a class="navbar-brand h1" href="{{ route('transactions.index') }}">All Transactions</a>
       <div class="justify-end ">
         <div class="col ">
           <a class="btn btn-sm btn-success" href="{{ route('transactions.create') }}">Add Transaction</a>

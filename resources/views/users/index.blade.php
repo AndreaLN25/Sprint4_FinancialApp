@@ -11,7 +11,7 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <div class="container-fluid">
-      <a class="navbar-brand h1" href={{ route('users.index') }}>CRUDUsers</a>
+      <a class="navbar-brand h1" href={{ route('users.index') }}>All Users</a>
       <div class="justify-end ">
         <div class="col ">
           <a class="btn btn-sm btn-success" href={{ route('users.create') }}>Add User</a>
