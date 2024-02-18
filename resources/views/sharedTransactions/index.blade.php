@@ -45,14 +45,18 @@
                 <p class="card-text"><strong>Number of Participants:</strong>
                     {{ $sharedTransaction->number_of_participants }}</p>
                 <p class="card-text"><strong>Name of Participants:</strong>
-                    @foreach(json_decode($sharedTransaction->name_of_participants) as $participantId)
-                      {{-- {{ \App\Models\UserModel::find($participantId)->full_name }}<br> --}}
-                      @if($user = \App\Models\UserModel::find($participantId))
-                      {{ $user->full_name }}<br>
-                  @else
-                      Unknown User<br>
-                  @endif
-                    @endforeach
+                    @if($sharedTransaction->name_of_participants !== null)
+                        @foreach(json_decode($sharedTransaction->name_of_participants) as $participantId)
+                        {{-- {{ \App\Models\UserModel::find($participantId)->full_name }}<br> --}}
+                            @if($user = \App\Models\UserModel::find($participantId))
+                              {{ $user->full_name }}<br>
+                            @else
+                                Unknown User<br>
+                            @endif
+                        @endforeach
+                    @else
+                        No participants specified
+                    @endif
                 </p>
                 <p class="card-text"><strong>Amount per Participant:</strong>
                     {{ $sharedTransaction->amount_per_participant }} € </p>
