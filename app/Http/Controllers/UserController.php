@@ -41,7 +41,6 @@ class UserController extends Controller
     }
 
 
-
     /**
      * Display the specified resource.
      */
@@ -51,20 +50,18 @@ class UserController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id){
         $user = UserModel::find($id);
 
-        
+
     /*if (!$user) {
         return redirect()->route("users.index")->with('error', 'User not found.');
     } */
         return view('users.edit', compact('user'));
     }
-
 
 
     /**
@@ -92,7 +89,6 @@ class UserController extends Controller
     }
 
 
-
     /**
      * Remove the specified resource from storage.
      */
@@ -103,7 +99,7 @@ class UserController extends Controller
             return redirect()->route('users.index')
                 ->with('error', 'User not found.');
         }
-        
+
         $user -> delete();
         return redirect()->route('users.index')
             ->with('success','User deleted successfully');

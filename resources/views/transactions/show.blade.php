@@ -19,7 +19,6 @@
           <p><strong>Date:</strong> {{ $transaction->date }}</p>
           <p><strong>Amount:</strong> ${{ $transaction->amount }}</p>
           <p><strong>Completed:</strong> {{ $transaction->completed }}</p>
-
           @if($transaction->movement_type === 'income')
           <p><strong>Category Income:</strong> {{ $transaction->category_income }}</p>
           <p><strong>Payment Method Income:</strong> {{ $transaction->payment_method_income }}</p>
@@ -27,7 +26,6 @@
           <p><strong>Category Expense:</strong> {{ $transaction->category_expense }}</p>
           <p><strong>Payment Method Expense:</strong> {{ $transaction->payment_method_expense }}</p>
       @endif
-      
           <a href="{{ route('transactions.index') }}" class="btn btn-primary">Continue to all transactions</a>
         @else
           <p>Transaction not found</p>

@@ -35,7 +35,6 @@
               @endforeach
           </select>
       </div>
-        
         <div class="form-group">
           <label for="number_of_participants">Number of Participants</label>
           <input type="text" class="form-control" id="number_of_participants" name="number_of_participants" required>

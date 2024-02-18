@@ -13,7 +13,6 @@
             <a class="navbar-brand h1" href="#">Financial Main Page</a>
         </div>
     </nav>
-
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm">
