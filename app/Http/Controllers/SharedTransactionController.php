@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+//use App\Http\Controllers\Controller;
 use App\Models\SharedTransactionModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
@@ -21,12 +22,14 @@ class SharedTransactionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+s
    /*  public function create(){
         return view('sharedTransactions.create');
     } */
     public function create(){
         $allUsers = UserModel::all(); 
         return view('sharedTransactions.create', compact('allUsers'));
+
     }
 
 
@@ -58,7 +61,7 @@ class SharedTransactionController extends Controller
             ->with('success', 'Shared Transaction created successfully');
     }
 
-
+  
 
     /**
      * Display the specified resource.
@@ -81,12 +84,15 @@ class SharedTransactionController extends Controller
     public function edit(string $id){
         $sharedTransaction = SharedTransactionModel::find($id);
 
-        /* if (!$sharedTransaction) {
+        if (!$sharedTransaction) {
             return redirect()->route('shared_transactions.index')
                 ->with('error', 'Shared Transaction not found.');
-        } */
+        }
+        $whoPaidOptions = SharedTransactionModel::distinct()->pluck('user_paid');
 
-        return view('sharedTransactions.edit', compact('sharedTransaction'));
+        $amount_per_participant = $sharedTransaction->number_of_participants > 0 ? $sharedTransaction->amount / $sharedTransaction->number_of_participants : 0;
+
+        return view('sharedTransactions.edit', compact('sharedTransaction', 'amount_per_participant','whoPaidOptions'));
     }
 
 

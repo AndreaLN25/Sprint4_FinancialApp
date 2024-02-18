@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             //$table->string('user_paid');
             $table->BigInteger('user_paid')->unsigned();
-            $table->foreign('user_paid')->references('id')->on('all_users'); //hace referencia a la columna id en la tabla all_users. Esto indica quién ha pagado la transacción compartida.
+            $table->foreign('user_paid')->references('id')->on('all_users'); 
             //$table->foreign('user_paid')->references('full_name')->on('all_users');
             $table->unsignedInteger('number_of_participants');
             $table->string('name_of_participants');
