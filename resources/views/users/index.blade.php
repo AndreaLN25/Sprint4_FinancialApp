@@ -23,10 +23,10 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
     </div>
   </nav>
   <div class="container mt-5">
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
       @if(count($users) > 0)
         @foreach ($users as $user)
-          <div class="col-sm">
+          <div class="col-sm mb-3">
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">{{ $user->first_name }} {{$user->last_name}}</h5>

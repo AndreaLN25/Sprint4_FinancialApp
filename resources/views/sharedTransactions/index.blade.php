@@ -23,10 +23,10 @@
     </div>
   </nav>
   <div class="container mt-5">
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
       @if(count($sharedTransactions) > 0)
         @foreach ($sharedTransactions as $sharedTransaction)
-          <div class="col-sm">
+          <div class="col-sm mb-3">
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Shared Transaction ID: {{ $sharedTransaction->id }}</h5>
