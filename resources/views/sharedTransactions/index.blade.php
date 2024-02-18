@@ -29,7 +29,7 @@
           <div class="col-sm mb-3">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">Shared Transaction ID: {{ $sharedTransaction->id }}</h5>
+                <h5 class="card-title">Shared Transaction: {{ $sharedTransaction->id }}</h5>
               </div>
               <div class="card-body">
                 {{-- <p class="card-text"><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
@@ -42,8 +42,8 @@
                     @else
                         No payer specified
                     @endisset
-                <p class="card-text"><strong>Number of Participants:</strong>
-                    {{ $sharedTransaction->number_of_participants }}</p>
+                {{-- <p class="card-text"><strong>Number of Participants:</strong>
+                    {{ $sharedTransaction->number_of_participants }}</p> --}}
                 <p class="card-text"><strong>Name of Participants:</strong>
                     @if($sharedTransaction->name_of_participants !== null)
                         @foreach(json_decode($sharedTransaction->name_of_participants) as $participantId)
