@@ -12,7 +12,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
             <a class="navbar-brand h1" href="#">New SharedTransactions</a>
-            <a href="{{ route('sharedTransactions.index') }}" class="btn btn-primary">Back to SharedTransactions</a>
+            <a href="{{ route('shared_transactions.index') }}" class="btn btn-primary">Back to SharedTransactions</a>
         </div>
     </nav>
 <div class="container h-100 mt-5">

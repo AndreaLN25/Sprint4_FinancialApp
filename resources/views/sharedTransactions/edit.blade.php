@@ -12,14 +12,13 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
             <a class="navbar-brand h1" href="#">Update SharedTransactions</a>
-            <a href="{{ route('sharedTransactions.index') }}" class="btn btn-primary">Back to SharedTransactions</a>
+            <a href="{{ route('shared_transactions.index') }}" class="btn btn-primary">Back to SharedTransactions</a>
         </div>
     </nav>
 <div class="container h-100 mt-5">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6">
       @if($sharedTransaction)
-        <h3>Edit Shared Transaction</h3>
         <form action="{{ route('shared_transactions.update', $sharedTransaction->id) }}" method="post">
           @csrf
           @method('PUT')
