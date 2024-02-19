@@ -54,8 +54,6 @@
                 @endforeach
             </select>
           </div> --}}
-
-
         <div class="form-group">
             <label for="name_of_participants">Name of Participants</label>
             <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
@@ -64,9 +62,6 @@
                 @endforeach
             </select>
         </div>
-
-
-
           <div class="form-group">
             <label for="amount_per_participant">Amount per Participant</label>
             <input type="text" class="form-control" id="amount_per_participant" name="amount_per_participant" value="{{ $sharedTransaction->amount_per_participant }}" required>

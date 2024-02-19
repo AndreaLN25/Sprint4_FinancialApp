@@ -80,7 +80,7 @@ class SharedTransactionController extends Controller
 
         $participantIds = json_decode($sharedTransaction->name_of_participants);
 
-        $participantNames = UserModel::whereIn('id', $participantIds)->pluck('full_name')->toArray();
+        $participantNames = UserModel::whereIn('id', $participantIds)->get()->pluck('full_name')->toArray();
 
         return view('sharedTransactions.show', compact('sharedTransaction','participantNames'));
     }
@@ -127,12 +127,16 @@ class SharedTransactionController extends Controller
                 ->with('error', 'Shared Transaction not found.');
         }
 
+        $nameOfParticipants = $request->input('name_of_participants');
+        if (is_array($nameOfParticipants)) {
+            $nameOfParticipants = json_encode($nameOfParticipants);
+        }
 
         // $sharedTransaction->update($request->all());
         $sharedTransaction->update([
             'amount' => $request->amount,
             'user_paid' => $request->user_paid,
-            'name_of_participants' => $request->input('name_of_participants'),
+            'name_of_participants' => $nameOfParticipants,
             'amount_per_participant' => $request->amount_per_participant,
             'date' => $request->date,
             'description' => $request->description,
