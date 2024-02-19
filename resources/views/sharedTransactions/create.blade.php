@@ -19,6 +19,15 @@
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6">
       <h3>Add a Shared Transaction</h3>
+      @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+      @endif
       <form action="{{ route('shared_transactions.store') }}" method="post">
         @csrf
         {{-- <div class="form-group">

@@ -47,6 +47,13 @@ class SharedTransactionController extends Controller
             'description' => 'required|string',
             'approval_status' => 'required|in:pending,approved,rejected',
             'note' => 'required|string',
+        ], [
+            'amount.min' => 'The amount must be at least 0.',
+            'name_of_participants.required' => 'At least one participant is required.',
+            'date.required' => 'Date required.',
+            'description.required' => 'Description required.',
+            'approval_status.in' => 'The approval status must be one of: pending, approved, rejected.',
+            'note.required' => 'The note is required.',
         ]);
 
         $request->merge([
