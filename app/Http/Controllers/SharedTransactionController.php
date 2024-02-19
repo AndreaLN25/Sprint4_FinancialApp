@@ -41,7 +41,7 @@ class SharedTransactionController extends Controller
             'user_paid' => 'required|exists:all_users,id',
             //'user_paid' => 'sometimes|required|exists:all_users,id',
             //'number_of_participants' => 'required|integer|min:1',
-            'name_of_participants' => 'required|array',
+            //'name_of_participants' => 'required|string',
             'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
             'description' => 'required|string',

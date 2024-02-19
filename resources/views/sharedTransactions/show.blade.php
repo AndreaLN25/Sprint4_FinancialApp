@@ -14,10 +14,14 @@
       <div class="col-10 col-md-8 col-lg-6">
         @if($sharedTransaction)
           <h3>New Shared Transaction Details</h3>
-          <p><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
-          <p><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p>
+          {{-- <p><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
+          <p><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p> --}}
           <p><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
-          <p><strong>Participants:</strong> {{ $sharedTransaction->participants }}</p>
+          <p><strong>Participants:</strong>
+                @foreach($participantNames as $participant)
+                {{ $participant }},
+                @endforeach
+          </p>
           <p><strong>Approval Status:</strong> {{ $sharedTransaction->approval_status }}</p>
           <p><strong>Note:</strong> {{ $sharedTransaction->note }}</p>
           <a href="{{ route('shared_transactions.index') }}" class="btn btn-primary">Continue to all shared transactions</a>
