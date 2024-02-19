@@ -9,11 +9,16 @@
   <title>User Details</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+          <a class="navbar-brand h1" href={{ route('users.index') }}>New User Details</a>
+          <a href="{{ route('users.index') }}" class="btn btn-primary">Go back to All Users</a>
+        </div>
+    </nav>
   <div class="container h-100 mt-5">
     <div class="row h-100 justify-content-center align-items-center">
       <div class="col-10 col-md-8 col-lg-6">
         @if($user)
-          <h3>New User Details</h3>
           <p><strong>First Name:</strong> {{ $user->first_name }}</p>
           <p><strong>Last Name:</strong> {{ $user->last_name }}</p>
           <p><strong>Email Address:</strong> {{ $user->mailadress }}</p>

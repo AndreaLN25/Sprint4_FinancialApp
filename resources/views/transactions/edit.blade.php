@@ -11,7 +11,7 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand h1" href="#">Update Transactions</a>
+            <a class="navbar-brand h1" href="#">Update Transaction</a>
             <a href="{{ route('transactions.index') }}" class="btn btn-primary">Back to Transactions</a>
         </div>
     </nav>
