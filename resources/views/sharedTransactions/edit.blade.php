@@ -22,10 +22,10 @@
         <form action="{{ route('shared_transactions.update', $sharedTransaction->id) }}" method="post">
           @csrf
           @method('PUT')
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="user_id">User ID</label>
             <input type="text" class="form-control" id="user_id" name="user_id" value="{{ $sharedTransaction->user_id }}" required>
-          </div>
+          </div> --}}
           {{-- <div class="form-group">
             <label for="transaction_id">Transaction ID</label>
             <input type="text" class="form-control" id="transaction_id" name="transaction_id" value="{{ $sharedTransaction->transaction_id }}" required>
@@ -36,16 +36,37 @@
           </div>
           <div class="form-group">
             <label for="user_paid">Who Paid</label>
-            <input type="text" class="form-control" id="user_paid" name="user_paid" value="{{ $sharedTransaction->user_paid }}" required>
+            <select class="form-control" id="user_paid" name="user_paid" required>
+                @foreach($allUsers as $user)
+                    <option value="{{ $user->id }}" {{ $sharedTransaction->user_paid === $user->id ? 'selected' : '' }}>{{ $user->full_name }}</option>
+                @endforeach
+            </select>
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="number_of_participants">Number of Participants</label>
             <input type="text" class="form-control" id="number_of_participants" name="number_of_participants" value="{{ $sharedTransaction->number_of_participants }}" required>
-          </div>
-          <div class="form-group">
+          </div> --}}
+          {{-- <div class="form-group">
             <label for="name_of_participants">Name of Participants</label>
-            <input type="text" class="form-control" id="name_of_participants" name="name_of_participants" value="{{ $sharedTransaction->name_of_participants }}" required>
-          </div>
+            <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
+                @foreach($allUsers as $user)
+                    <option value="{{ $user->id }}">{{ $user->full_name }}</option>
+                @endforeach
+            </select>
+          </div> --}}
+
+
+        <div class="form-group">
+            <label for="name_of_participants">Name of Participants</label>
+            <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
+                @foreach($allUsers as $user)
+                    <option value="{{ $user->id }}" {{ in_array($user->id, is_string($sharedTransaction->name_of_participants) ? json_decode($sharedTransaction->name_of_participants) : $sharedTransaction->name_of_participants) ? 'selected' : '' }}>{{ $user->full_name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+
+
           <div class="form-group">
             <label for="amount_per_participant">Amount per Participant</label>
             <input type="text" class="form-control" id="amount_per_participant" name="amount_per_participant" value="{{ $sharedTransaction->amount_per_participant }}" required>
@@ -79,21 +100,16 @@
   </div>
 </div>
 <script>
-  // Agrega un evento 'input' a los campos amount y number_of_participants
-  document.getElementById('amount').addEventListener('input', updateAmountPerParticipant);
-  document.getElementById('number_of_participants').addEventListener('input', updateAmountPerParticipant);
+        // Escucha los cambios en el campo de monto y en el campo de selección múltiple para calcular el monto por participante
+        document.getElementById('amount').addEventListener('input', updateAmountPerParticipant);
+        document.getElementById('name_of_participants').addEventListener('change', updateAmountPerParticipant);
 
-  function updateAmountPerParticipant() {
-    // Obtiene los valores actuales de amount y number_of_participants
-    var amount = parseFloat(document.getElementById('amount').value) || 0;
-    var numberOfParticipants = parseInt(document.getElementById('number_of_participants').value) || 1;
-
-    // Calcula amount_per_participant
-    var amountPerParticipant = numberOfParticipants > 0 ? amount / numberOfParticipants : 0;
-
-    // Actualiza el campo amount_per_participant en tiempo real
-    document.getElementById('amount_per_participant').value = amountPerParticipant.toFixed(2);
-  }
+        function updateAmountPerParticipant() {
+            var amount = parseFloat(document.getElementById('amount').value) || 0;
+            var numberOfParticipants = document.getElementById('name_of_participants').selectedOptions.length || 1;
+            var amountPerParticipant = numberOfParticipants > 0 ? amount / numberOfParticipants : 0;
+            document.getElementById('amount_per_participant').value = amountPerParticipant.toFixed(2);
+        }
 </script>
 </body>
 </html>

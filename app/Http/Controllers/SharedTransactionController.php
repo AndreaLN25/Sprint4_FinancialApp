@@ -13,7 +13,8 @@ class SharedTransactionController extends Controller
      */
     public function index(){
         $sharedTransactions = SharedTransactionModel::all();
-        return view('sharedTransactions.index', compact('sharedTransactions'));
+        $allUsers = UserModel::all();
+        return view('sharedTransactions.index', compact('sharedTransactions','allUsers'));
     }
 
 
@@ -58,7 +59,8 @@ class SharedTransactionController extends Controller
             'amount' => $request->amount,
             'user_paid' => $request->user_paid,
             //'number_of_participants' => $request->number_of_participants,
-            'name_of_participants' => $request->name_of_participants,
+            // 'name_of_participants' => $request->name_of_participants,
+            'name_of_participants' => $request->input('name_of_participants'),
             'amount_per_participant' => $request->amount_per_participant,
             'date' => $request->date,
             'description' => $request->description,
@@ -89,13 +91,14 @@ class SharedTransactionController extends Controller
      */
     public function edit(string $id){
         $sharedTransaction = SharedTransactionModel::find($id);
+        $allUsers = UserModel::all();
 
         /* if (!$sharedTransaction) {
             return redirect()->route('shared_transactions.index')
                 ->with('error', 'Shared Transaction not found.');
         } */
 
-        return view('sharedTransactions.edit', compact('sharedTransaction'));
+        return view('sharedTransactions.edit', compact('sharedTransaction','allUsers'));
     }
 
 
@@ -104,11 +107,11 @@ class SharedTransactionController extends Controller
      */
     public function update(Request $request, string $id){
         $request->validate([
-            'user_id' => 'required|exists:all_users,id',
+            //'user_id' => 'required|exists:all_users,id',
             //'transaction_id' => 'required|exists:all_transactions,id',
             'amount' => 'nullable|numeric|min:0',
-            //'user_paid' => 'required|integer',
-            'number_of_participants' => 'required|integer|min:1',
+            'user_paid' => 'required|exists:all_users,id',
+            //'number_of_participants' => 'required|integer|min:1',
             'name_of_participants' => 'required|array',
             'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
@@ -124,7 +127,18 @@ class SharedTransactionController extends Controller
                 ->with('error', 'Shared Transaction not found.');
         }
 
-        $sharedTransaction->update($request->all());
+
+        // $sharedTransaction->update($request->all());
+        $sharedTransaction->update([
+            'amount' => $request->amount,
+            'user_paid' => $request->user_paid,
+            'name_of_participants' => $request->input('name_of_participants'),
+            'amount_per_participant' => $request->amount_per_participant,
+            'date' => $request->date,
+            'description' => $request->description,
+            'approval_status' => $request->approval_status,
+            'note' => $request->note,
+        ]);
 
         return redirect()->route('shared_transactions.show', ['shared_transaction' => $sharedTransaction->id])
             ->with('success', 'Shared Transaction updated successfully');
