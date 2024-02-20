@@ -12,6 +12,7 @@ class TransactionModel extends Model
 
     protected $fillable = [
         'movement_type',
+        'user_id',
         'description',
         'date',
         'amount',
@@ -26,7 +27,7 @@ class TransactionModel extends Model
 
     public function users(){
         //return $this->hasMany(UserModel::class);
-        return $this->belongsToMany(UserModel::class);
+        return $this->belongsToMany(UserModel::class,'all_users', 'transaction_id', 'user_id');
     }
     /* public function sharedTransactions(){
         return $this->hasMany(SharedTransactionModel::class, 'transaction_id','id');

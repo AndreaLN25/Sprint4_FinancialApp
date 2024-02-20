@@ -11,7 +11,7 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand h1" href="#">Update Transactions</a>
+            <a class="navbar-brand h1" href="#">Update Transaction</a>
             <a href="{{ route('transactions.index') }}" class="btn btn-primary">Back to Transactions</a>
         </div>
     </nav>
@@ -32,6 +32,15 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
               <div class="form-group">
                 <label for="description">Description</label>
                 <input type="text" class="form-control" id="description" name="description" value="{{ $transaction->description }}" required>
+              </div>
+              <div class="form-group">
+                <label for="user_id">User</label>
+                <select class="form-control" id="user_id" name="user_id" required>
+                    <option value="" selected disabled>Select User</option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}" {{ $transaction->user_id === $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="form-group">
                 <label for="date">Date</label>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('all_transactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('all_users');
             $table->enum('movement_type', ['income', 'expense']);
             $table->string('description');
             $table->date('date');

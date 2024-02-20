@@ -31,11 +31,14 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
         <div class="form-group">
           <label for="mailadress">Email address</label>
           <input type="email" class="form-control" id="mailadress" name="mailadress" required>
+          @error('mailadress')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label for="password">Password</label>
           <textarea class="form-control" id="password" name="password" rows="3" required></textarea>
-        </div>
+        </div> --}}
         <br>
         <button type="submit" class="btn btn-primary">Create User</button>
       </form>

@@ -11,20 +11,28 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand h1" href="#">New SharedTransactions</a>
+            <a class="navbar-brand h1" href="#">New SharedTransaction</a>
             <a href="{{ route('shared_transactions.index') }}" class="btn btn-primary">Back to SharedTransactions</a>
         </div>
     </nav>
 <div class="container h-100 mt-5">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6">
-      <h3>Add a Shared Transaction</h3>
+      @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+      @endif
       <form action="{{ route('shared_transactions.store') }}" method="post">
         @csrf
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label for="user_id">User ID-who paid</label>
           <input type="text" class="form-control" id="user_id" name="user_id" required>
-        </div>
+        </div> --}}
         {{-- <div class="form-group">
           <label for="transaction_id">Transaction ID</label>
           <input type="text" class="form-control" id="transaction_id" name="transaction_id" required>
@@ -41,13 +49,13 @@
               @endforeach
           </select>
       </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label for="number_of_participants">Number of Participants</label>
           <input type="text" class="form-control" id="number_of_participants" name="number_of_participants" required>
-        </div>
+        </div> --}}
         <div class="form-group">
           <label for="name_of_participants">Name of Participants</label>
-          <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
+          <select class="form-control" id="name_of_participants" name="name_of_participants" multiple required>
               @foreach($allUsers as $user)
                   <option value="{{ $user->id }}">{{ $user->full_name }}</option>
               @endforeach
@@ -84,21 +92,16 @@
   </div>
 </div>
 <script>
-  // Agrega un evento 'input' a los campos amount y number_of_participants
-  document.getElementById('amount').addEventListener('input', updateAmountPerParticipant);
-  document.getElementById('number_of_participants').addEventListener('input', updateAmountPerParticipant);
+        // Escucha los cambios en el campo de monto y en el campo de selección múltiple para calcular el monto por participante
+        document.getElementById('amount').addEventListener('input', updateAmountPerParticipant);
+        document.getElementById('name_of_participants').addEventListener('change', updateAmountPerParticipant);
 
-  function updateAmountPerParticipant() {
-    // Obtiene los valores actuales de amount y number_of_participants
-    var amount = parseFloat(document.getElementById('amount').value) || 0;
-    var numberOfParticipants = parseInt(document.getElementById('number_of_participants').value) || 1;
-
-    // Calcula amount_per_participant
-    var amountPerParticipant = numberOfParticipants > 0 ? amount / numberOfParticipants : 0;
-
-    // Actualiza el campo amount_per_participant en tiempo real
-    document.getElementById('amount_per_participant').value = amountPerParticipant.toFixed(2);
-  }
+        function updateAmountPerParticipant() {
+            var amount = parseFloat(document.getElementById('amount').value) || 0;
+            var numberOfParticipants = document.getElementById('name_of_participants').selectedOptions.length || 1;
+            var amountPerParticipant = numberOfParticipants > 0 ? amount / numberOfParticipants : 0;
+            document.getElementById('amount_per_participant').value = amountPerParticipant.toFixed(2);
+        }
 </script>
 </body>
 </html>

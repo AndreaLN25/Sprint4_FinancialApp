@@ -14,7 +14,7 @@ class UserModel extends Model
         'first_name',
         'last_name',
         'mailadress',
-        'password',
+        //'password',
     ];
 
     public function transactions(){

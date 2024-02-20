@@ -9,13 +9,19 @@
   <title>Transaction Details</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+          <a class="navbar-brand h1" href={{ route('users.index') }}>New Transaction Details</a>
+          <a href="{{ route('transactions.index') }}" class="btn btn-primary">Go back to All Transactions</a>
+        </div>
+    </nav>
   <div class="container h-100 mt-5">
     <div class="row h-100 justify-content-center align-items-center">
       <div class="col-10 col-md-8 col-lg-6">
         @if($transaction)
-          <h3>New Transaction Details</h3>
           <p><strong>Movement Type:</strong> {{ $transaction->movement_type }}</p>
           <p><strong>Description:</strong> {{ $transaction->description }}</p>
+          <p><strong>User:</strong> {{ $transaction->user ? $transaction->user->name : 'Unknown User' }}</p>
           <p><strong>Date:</strong> {{ $transaction->date }}</p>
           <p><strong>Amount:</strong> ${{ $transaction->amount }}</p>
           <p><strong>Completed:</strong> {{ $transaction->completed }}</p>
