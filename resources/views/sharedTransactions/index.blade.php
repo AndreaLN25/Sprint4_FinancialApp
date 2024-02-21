@@ -7,18 +7,52 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <title>Shared Transactions</title>
+  <style>
+    .navbar {
+        background-color: #ffc107;
+    }
+    .navbar-brand {
+        font-size: 28px;
+    }
+
+    .navbar .btn {
+        font-size: 20px;
+    }
+    .card {
+        background-color: rgba(191, 191, 191, 0.439);
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        font-size: 24px;
+    }
+
+    .card-text {
+        font-size: 20px;
+    }
+
+    .delete-button {
+        margin-left: auto;
+    }
+    footer {
+        background-color: #f7f7f7;
+        color: rgb(96, 10, 10);
+        text-align: center;
+        padding: 20px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <div class="container-fluid">
       <a class="navbar-brand h1" href={{ route('shared_transactions.index') }}>Shared Transactions</a>
-      <div class="justify-end ">
-        <div class="col ">
-          <a class="btn btn-sm btn-success" href={{ route('shared_transactions.create') }}>Add Shared Transaction</a>
-        </div>
-        <div class="col">
-          <a class="btn btn-sm btn-primary" href="{{ url('/') }}">Home</a>
-        </div>
+      <div class="ms-auto">
+        <a class="btn btn-sm btn-success" href={{ route('shared_transactions.create') }}>Add Shared Transaction</a>
+        <a class="btn btn-sm btn-primary" href="{{ url('/') }}">Home</a>
       </div>
     </div>
   </nav>
@@ -43,55 +77,8 @@
                         No payer specified
                     @endisset
                 {{-- <p class="card-text"><strong>Number of Participants:</strong>
-                    {{ $sharedTransaction->number_of_participants }}</p> --}}
-                {{-- <p class="card-text"><strong>Name of Participants:</strong>
-                    @if($sharedTransaction->name_of_participants !== null)
-                    @else
-                        No participants specified
-                    @endif
-                </p> --}}
-{{--                 <p class="card-text"><strong>Name of Participants:</strong>
-                    @if($sharedTransaction->name_of_participants !== null)
-                        @foreach($sharedTransaction->name_of_participants as $participantId)
-                            @foreach($allUsers as $user)
-                                @if($user->id == $participantId)
-                                    {{ $user->full_name }},
-                                @endif
-                            @endforeach
-                        @endforeach
-                    @else
-                        No participants specified
-                    @endif
-                </p>
- --}}
-{{--                 <p class="card-text"><strong>Name of Participants:</strong>
-                    @if($sharedTransaction->name_of_participants !== null)
-                        @foreach($sharedTransaction->name_of_participants as $participantId)
-                            @foreach($allUsers as $user)
-                                @if($user->id == $participantId)
-                                    {{ $user->full_name }},
-                                @endif
-                            @endforeach
-                        @endforeach
-                    @else
-                        No participants specified
-                    @endif
-                </p> --}}
-                <p class="card-text"><strong>Name of Participants:</strong>
-                    @if(is_array($sharedTransaction->name_of_participants))
-                        @foreach($sharedTransaction->name_of_participants as $participantId)
-                            @foreach($allUsers as $user)
-                                @if($user->id == $participantId)
-                                    {{ $user->full_name }},
-                                @endif
-                            @endforeach
-                        @endforeach
-                    @else
-                        No participants specified
-                    @endif
-                </p>
-
-
+                {{ $sharedTransaction->number_of_participants }}</p> --}}
+                <p class="card-text"><strong>Name of Participants:</strong> {{ $sharedTransaction->name_of_participants }}</p>
                 <p class="card-text"><strong>Amount per Participant:</strong>
                     {{ $sharedTransaction->amount_per_participant }} € </p>
                 <p class="card-text"><strong>Date:</strong> {{ $sharedTransaction->date }}</p>
@@ -100,17 +87,13 @@
                 <p class="card-text"><strong>Note:</strong> {{ $sharedTransaction->note }}</p>
               </div>
               <div class="card-footer">
-                <div class="row">
-                  <div class="col-sm">
-                    <a href="{{ route('shared_transactions.edit', $sharedTransaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                  </div>
-                  <div class="col-sm">
-                    <form id="delete-form-{{ $sharedTransaction->id }}" action="{{ route('shared_transactions.destroy', $sharedTransaction->id) }}" method="post" onsubmit="return confirmDelete()">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                  </div>
+                <div class="d-flex justify-content-between">
+                  <a href="{{ route('shared_transactions.edit', $sharedTransaction->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                  <form id="delete-form-{{ $sharedTransaction->id }}" action="{{ route('shared_transactions.destroy', $sharedTransaction->id) }}" method="post" onsubmit="return confirmDelete()">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -128,5 +111,8 @@
       return confirm('Are you sure you want to delete this shared transaction?');
     }
   </script>
+        <footer>
+            <p>&copy; 2024 [Financial App]. All rights reserved.</p>
+        </footer>
 </body>
 </html>

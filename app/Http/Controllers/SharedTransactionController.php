@@ -14,6 +14,7 @@ class SharedTransactionController extends Controller
     public function index(){
         $sharedTransactions = SharedTransactionModel::all();
         $allUsers = UserModel::all();
+        // dd($sharedTransactions->first()->name_of_participants);
         return view('sharedTransactions.index', compact('sharedTransactions','allUsers'));
     }
 
@@ -41,7 +42,7 @@ class SharedTransactionController extends Controller
             'user_paid' => 'required|exists:all_users,id',
             //'user_paid' => 'sometimes|required|exists:all_users,id',
             //'number_of_participants' => 'required|integer|min:1',
-            //'name_of_participants' => 'required|string',
+            //'name_of_participants' => 'required|array',
             'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
             'description' => 'required|string',
@@ -84,13 +85,12 @@ class SharedTransactionController extends Controller
      */
     public function show(string $id){
         $sharedTransaction = SharedTransactionModel::find($id);
-
         $participantIds = json_decode($sharedTransaction->name_of_participants);
+        $participantNames = UserModel::whereIn('id', $participantIds)->get();
 
-        $participantNames = UserModel::whereIn('id', $participantIds)->get()->pluck('full_name')->toArray();
-
-        return view('sharedTransactions.show', compact('sharedTransaction','participantNames'));
+        return view('sharedTransactions.show', compact('sharedTransaction', 'participantNames'));
     }
+
 
 
     /**
@@ -99,11 +99,19 @@ class SharedTransactionController extends Controller
     public function edit(string $id){
         $sharedTransaction = SharedTransactionModel::find($id);
         $allUsers = UserModel::all();
+        //dd($sharedTransaction->name_of_participants);
 
-        /* if (!$sharedTransaction) {
+        if (!$sharedTransaction) {
             return redirect()->route('shared_transactions.index')
                 ->with('error', 'Shared Transaction not found.');
-        } */
+        }
+
+        if ($sharedTransaction->name_of_participants !== null) {
+            $sharedTransaction->name_of_participants = json_decode($sharedTransaction->name_of_participants, true);
+        } else {
+            $sharedTransaction->name_of_participants = [];
+        }
+
 
         return view('sharedTransactions.edit', compact('sharedTransaction','allUsers'));
     }
@@ -119,7 +127,7 @@ class SharedTransactionController extends Controller
             'amount' => 'nullable|numeric|min:0',
             'user_paid' => 'required|exists:all_users,id',
             //'number_of_participants' => 'required|integer|min:1',
-            'name_of_participants' => 'required|array',
+            //'name_of_participants' => 'required|array',
             'amount_per_participant' => 'nullable|numeric|min:0',
             'date' => 'required|date',
             'description' => 'required|string',
@@ -135,6 +143,7 @@ class SharedTransactionController extends Controller
         }
 
         $nameOfParticipants = $request->input('name_of_participants');
+
         if (is_array($nameOfParticipants)) {
             $nameOfParticipants = json_encode($nameOfParticipants);
         }

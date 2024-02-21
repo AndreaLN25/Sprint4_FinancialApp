@@ -16,7 +16,9 @@ class TransactionController extends Controller
     public function index(){
         //
         $transactions = TransactionModel::all();
-        return view('transactions.index', compact('transactions'));
+        $users = UserModel::all();
+
+        return view('transactions.index', compact('transactions', 'users'));
     }
 
 

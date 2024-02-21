@@ -7,6 +7,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <title>Create Shared Transaction</title>
+  <style>
+    footer {
+        background-color: #f7f7f7;
+        color: rgb(96, 10, 10);
+        text-align: center;
+        padding: 20px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+  </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
@@ -55,9 +66,9 @@
         </div> --}}
         <div class="form-group">
           <label for="name_of_participants">Name of Participants</label>
-          <select class="form-control" id="name_of_participants" name="name_of_participants" multiple required>
+          <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
               @foreach($allUsers as $user)
-                  <option value="{{ $user->id }}">{{ $user->full_name }}</option>
+                  <option value="{{ $user->full_name }}">{{ $user->full_name }}</option>
               @endforeach
           </select>
         </div>
@@ -103,5 +114,8 @@
             document.getElementById('amount_per_participant').value = amountPerParticipant.toFixed(2);
         }
 </script>
+<footer>
+    <p>&copy; 2024 [Financial App]. All rights reserved.</p>
+</footer>
 </body>
 </html>

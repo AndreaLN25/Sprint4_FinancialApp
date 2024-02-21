@@ -16,7 +16,7 @@ class SharedTransactionModel extends Model
         //'transaction_id',
         'amount',
         'user_paid',
-        'number_of_participants',
+        //'number_of_participants',
         'name_of_participants',
         'amount_per_participant',
         'date',

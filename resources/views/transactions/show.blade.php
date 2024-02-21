@@ -7,6 +7,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <title>Transaction Details</title>
+  <style>
+    footer {
+        background-color: #f7f7f7;
+        color: rgb(96, 10, 10);
+        text-align: center;
+        padding: 20px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+  </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
@@ -21,7 +32,7 @@
         @if($transaction)
           <p><strong>Movement Type:</strong> {{ $transaction->movement_type }}</p>
           <p><strong>Description:</strong> {{ $transaction->description }}</p>
-          <p><strong>User:</strong> {{ $transaction->user ? $transaction->user->name : 'Unknown User' }}</p>
+          <p><strong>User:</strong> {{ $transaction->user ? $transaction->user->getFullNameAttribute() : 'Unknown User' }}</p>
           <p><strong>Date:</strong> {{ $transaction->date }}</p>
           <p><strong>Amount:</strong> ${{ $transaction->amount }}</p>
           <p><strong>Completed:</strong> {{ $transaction->completed }}</p>
@@ -39,5 +50,8 @@
       </div>
     </div>
   </div>
+  <footer>
+    <p>&copy; 2024 [Financial App]. All rights reserved.</p>
+</footer>
 </body>
 </html>

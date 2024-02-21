@@ -7,6 +7,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <title>Shared Transaction Details</title>
+  <style>
+    footer {
+        background-color: #f7f7f7;
+        color: rgb(96, 10, 10);
+        text-align: center;
+        padding: 20px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+  </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
@@ -23,11 +34,12 @@
           {{-- <p><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
           <p><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p> --}}
           <p><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
-          <p><strong>Participants:</strong>
+          <p><strong>Name of Participants:</strong></p>
+            <ul>
                 @foreach($participantNames as $participant)
-                {{ $participant }},
+                    <li>{{ $participant->full_name }}</li>
                 @endforeach
-          </p>
+            </ul>
           <p><strong>Approval Status:</strong> {{ $sharedTransaction->approval_status }}</p>
           <p><strong>Note:</strong> {{ $sharedTransaction->note }}</p>
           <a href="{{ route('shared_transactions.index') }}" class="btn btn-primary">Continue to all shared transactions</a>
@@ -37,5 +49,8 @@
       </div>
     </div>
   </div>
+<footer>
+    <p>&copy; 2024 [Financial App]. All rights reserved.</p>
+</footer>
 </body>
 </html>
