@@ -23,10 +23,9 @@ class UserModel extends Model
     }
     public function sharedTransactions(){
         return $this->hasMany(SharedTransactionModel::class, 'user_id');
-}
+    }
 
-    public function getFullNameAttribute()
-    {
+    public function getFullNameAttribute(){
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
 

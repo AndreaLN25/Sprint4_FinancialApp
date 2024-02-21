@@ -48,11 +48,10 @@ class TransactionController extends Controller
             'payment_method_expense' => $request->input('movement_type') == 'expense' ? ['nullable', Rule::in(['cash', 'transfer', 'check', 'bizum', 'card'])] : 'nullable',
         ]);
 
-        // TransactionModel::create($request->all());
 
         TransactionModel::create([
             'movement_type' => $request->input('movement_type'),
-            'user_id' => $request->input('user_id'), // Asigna el ID del usuario seleccionado
+            'user_id' => $request->input('user_id'),
             'description' => $request->input('description'),
             'date' => $request->input('date'),
             'amount' => $request->input('amount'),
@@ -90,10 +89,6 @@ class TransactionController extends Controller
             $user = UserModel::find($transaction->user_id);
             $users->push($user);
         }
-
-    /*if (!$transaction) {
-        return redirect()->route("transactions.index")->with('error', 'Transaction not found.');
-    } */
         return view('transactions.edit',compact('transaction','users'));
     }
 

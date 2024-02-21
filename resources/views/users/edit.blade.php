@@ -47,10 +47,6 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
                 <label for="mailadress">Email Address</label>
                 <input type="email" class="form-control" id="mailadress" name="mailadress" value="{{ $user->mailadress }}" required>
               </div>
-              {{-- <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" value="{{ $user->password }}" required>
-              </div> --}}
               <button type="submit" class="btn mt-3 btn-primary">Update User</button>
             </form>
         @else

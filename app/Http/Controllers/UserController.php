@@ -58,10 +58,6 @@ class UserController extends Controller
     public function edit(string $id){
         $user = UserModel::find($id);
 
-
-    /*if (!$user) {
-        return redirect()->route("users.index")->with('error', 'User not found.');
-    } */
         return view('users.edit', compact('user'));
     }
 

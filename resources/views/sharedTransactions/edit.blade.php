@@ -33,14 +33,6 @@
         <form action="{{ route('shared_transactions.update', $sharedTransaction->id) }}" method="post">
           @csrf
           @method('PUT')
-          {{-- <div class="form-group">
-            <label for="user_id">User ID</label>
-            <input type="text" class="form-control" id="user_id" name="user_id" value="{{ $sharedTransaction->user_id }}" required>
-          </div> --}}
-          {{-- <div class="form-group">
-            <label for="transaction_id">Transaction ID</label>
-            <input type="text" class="form-control" id="transaction_id" name="transaction_id" value="{{ $sharedTransaction->transaction_id }}" required>
-          </div> --}}
           <div class="form-group">
             <label for="amount">Amount</label>
             <input type="text" class="form-control" id="amount" name="amount" value="{{ $sharedTransaction->amount }}" required>
@@ -53,10 +45,6 @@
                 @endforeach
             </select>
           </div>
-          {{-- <div class="form-group">
-            <label for="number_of_participants">Number of Participants</label>
-            <input type="text" class="form-control" id="number_of_participants" name="number_of_participants" value="{{ $sharedTransaction->number_of_participants }}" required>
-          </div> --}}
         <div class="form-group">
             <label for="name_of_participants">Name of Participants</label>
             <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
