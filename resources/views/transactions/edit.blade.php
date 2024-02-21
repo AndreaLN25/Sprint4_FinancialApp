@@ -49,7 +49,7 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
                 <select class="form-control" id="user_id" name="user_id" required>
                     <option value="" selected disabled>Select User</option>
                     @foreach($users as $user)
-                        <option value="{{ $user->id }}" {{ $transaction->user_id === $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                        <option value="{{ $user->id }}" {{ $transaction->user_id === $user->id ? 'selected' : '' }}>{{ $user->getFullNameAttribute() }}</option>
                     @endforeach
                 </select>
               </div>

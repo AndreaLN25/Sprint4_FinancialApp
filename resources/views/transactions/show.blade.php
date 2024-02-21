@@ -32,7 +32,7 @@
         @if($transaction)
           <p><strong>Movement Type:</strong> {{ $transaction->movement_type }}</p>
           <p><strong>Description:</strong> {{ $transaction->description }}</p>
-          <p><strong>User:</strong> {{ $transaction->user ? $transaction->user->name : 'Unknown User' }}</p>
+          <p><strong>User:</strong> {{ $transaction->user ? $transaction->user->getFullNameAttribute() : 'Unknown User' }}</p>
           <p><strong>Date:</strong> {{ $transaction->date }}</p>
           <p><strong>Amount:</strong> ${{ $transaction->amount }}</p>
           <p><strong>Completed:</strong> {{ $transaction->completed }}</p>
