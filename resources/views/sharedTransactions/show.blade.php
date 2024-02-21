@@ -34,11 +34,12 @@
           {{-- <p><strong>User ID:</strong> {{ $sharedTransaction->user_id }}</p>
           <p><strong>Transaction ID:</strong> {{ $sharedTransaction->transaction_id }}</p> --}}
           <p><strong>Amount:</strong> {{ $sharedTransaction->amount }}</p>
-          <p><strong>Participants:</strong>
+          <p><strong>Name of Participants:</strong></p>
+            <ul>
                 @foreach($participantNames as $participant)
-                {{ $participant }},
+                    <li>{{ $participant->full_name }}</li>
                 @endforeach
-          </p>
+            </ul>
           <p><strong>Approval Status:</strong> {{ $sharedTransaction->approval_status }}</p>
           <p><strong>Note:</strong> {{ $sharedTransaction->note }}</p>
           <a href="{{ route('shared_transactions.index') }}" class="btn btn-primary">Continue to all shared transactions</a>

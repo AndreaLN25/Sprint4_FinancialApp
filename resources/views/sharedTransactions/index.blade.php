@@ -77,26 +77,8 @@
                         No payer specified
                     @endisset
                 {{-- <p class="card-text"><strong>Number of Participants:</strong>
-                    {{ $sharedTransaction->number_of_participants }}</p> --}}
-                {{-- <p class="card-text"><strong>Name of Participants:</strong>
-                    @if($sharedTransaction->name_of_participants !== null)
-                    @else
-                        No participants specified
-                    @endif
-                </p> --}}
-                <p class="card-text"><strong>Name of Participants:</strong>
-                    @if(is_array($sharedTransaction->name_of_participants))
-                        @foreach($sharedTransaction->name_of_participants as $participantId)
-                            @foreach($allUsers as $user)
-                                @if($user->id == $participantId)
-                                    {{ $user->full_name }},
-                                @endif
-                            @endforeach
-                        @endforeach
-                    @else
-                        No participants specified
-                    @endif
-                </p>
+                {{ $sharedTransaction->number_of_participants }}</p> --}}
+                <p class="card-text"><strong>Name of Participants:</strong> {{ $sharedTransaction->name_of_participants }}</p>
                 <p class="card-text"><strong>Amount per Participant:</strong>
                     {{ $sharedTransaction->amount_per_participant }} € </p>
                 <p class="card-text"><strong>Date:</strong> {{ $sharedTransaction->date }}</p>

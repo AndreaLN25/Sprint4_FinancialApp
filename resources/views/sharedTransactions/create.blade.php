@@ -66,9 +66,9 @@
         </div> --}}
         <div class="form-group">
           <label for="name_of_participants">Name of Participants</label>
-          <select class="form-control" id="name_of_participants" name="name_of_participants" multiple required>
+          <select class="form-control" id="name_of_participants" name="name_of_participants[]" multiple required>
               @foreach($allUsers as $user)
-                  <option value="{{ $user->id }}">{{ $user->full_name }}</option>
+                  <option value="{{ $user->full_name }}">{{ $user->full_name }}</option>
               @endforeach
           </select>
         </div>
