@@ -13,7 +13,7 @@
         .card {
             background-color: rgba(191, 191, 191, 0.672);
             margin-top: 100px;
-            height: 400px;
+            height: 300px;
         }
         .card-title {
             font-size: 36px;
@@ -49,6 +49,11 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
             <a class="navbar-brand h1" href="#">HOME</a>
+            <div class="ml-auto">
+                <a href="{{ route('users.index') }}" class="btn btn-primary btn-sm">View Users</a>
+                <a href="{{ route('transactions.index') }}" class="btn btn-primary btn-sm">View Transactions</a>
+                <a href="{{ route('shared_transactions.index') }}" class="btn btn-primary btn-sm">View Shared Transactions</a>
+            </div>
         </div>
     </nav>
     <div class="container mt-5">
@@ -64,9 +69,9 @@
                     <div class="card-body">
                         <p class="card-text">Manage user information.</p>
                     </div>
-                    <div class="card-footer">
+{{--                     <div class="card-footer">
                         <a href="{{ route('users.index') }}" class="btn btn-primary btn-sm">View Users</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-sm">
@@ -77,9 +82,9 @@
                     <div class="card-body">
                         <p class="card-text">Manage individual transactions.</p>
                     </div>
-                    <div class="card-footer">
+{{--                     <div class="card-footer">
                         <a href="{{ route('transactions.index') }}" class="btn btn-primary btn-sm">View Transactions</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-sm">
@@ -90,9 +95,9 @@
                     <div class="card-body">
                         <p class="card-text">Manage shared transactions.</p>
                     </div>
-                    <div class="card-footer">
+{{--                     <div class="card-footer">
                         <a href="{{ route('shared_transactions.index') }}" class="btn btn-primary btn-sm">View Shared Transactions</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
